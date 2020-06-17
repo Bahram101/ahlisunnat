@@ -35,8 +35,8 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Статьи', 'url' => ['/site/article']],
-            ['label' => 'Категории', 'url' => ['/site/category']],
+            ['label' => 'Статьи', 'url' => ['/admin/article']],
+            ['label' => 'Категории', 'url' => ['/admin/category']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Выход', 'url' => ['/site/logout']]
             ) : (
