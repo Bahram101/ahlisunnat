@@ -1,0 +1,765 @@
+<?
+$json = file_get_contents(
+    'https://namaztimes.kz/api/praytimes?id=20720&type=json'
+);
+$months = [
+    'islamic' => [
+        'ЗУЛ-ҲИЖЖА','МУҲАРРАМ','САФАР','РАБИУЛ-АВВАЛ','РАБИУЛ-ОХИР',
+        'ЖУМОДИЛ-АВВАЛ','ЖУМОДИЛ-ОХИР','РАЖАБ','ШАЪБОН','РАМАЗОН',
+        'ШАВВОЛ','ЗУЛ-ҚАЪДА'
+    ],
+    'ru' => [
+        'Январь', 'Февраль', 'Наурыз', 'Апрель',
+        'Май', 'июнь', 'июль', 'август',
+        'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+    ]
+];
+
+$jsonN = json_decode($json,true);
+date_default_timezone_set('Asia/Almaty');
+//Islamic Date
+$date = strip_tags($jsonN['islamic_date']);
+$chunks = explode ("-", $date, 3);
+$islamic_date =  $chunks[2].' - '.$months['islamic'][$chunks[1]].', '.$chunks[0].' йил';
+//Date
+$month = date("n")-1;
+$day = date("j");
+$year = date("Y");
+$Date = $day.' - '.$months['ru'][$month].', '.$year.' йил';
+
+$array = [
+    0 =>'imsak',
+    1 =>'kun',
+    2 =>'besin',
+    3 =>'ekindi',
+    4 =>'aqsham',
+    5 =>'quptan'
+];
+$arrays = [
+    0 =>'imsok',
+    1 =>'kuesh',
+    2 =>'peshin',
+    3 =>'asr',
+    4 =>'shom',
+    5 =>'huftan'
+];
+
+foreach ($array as $key => $value) {
+    $time = strtotime(date('G:i'));
+    $Atime = strtotime($jsonN['praytimes'][$value]);
+    $Btime = strtotime($jsonN['praytimes'][$array[$key+1]]);
+    $Ctime = strtotime("+1 day",strtotime( $jsonN['praytimes'][$array[0]]));
+
+    $Ctime = !empty($array[$key+1]) ? $Btime : $Ctime;
+    //*Check
+    // echo date('Y-n-d H:i',$Atime).'  - '.date('Y-n-d H:i',$time).'  -  '.date('Y-n-d H:i',$Ctime).'<br>';
+    if($time >= $Atime and $time <= $Btime){
+        //echo $Atime.'  - '.$time.' -  '.$Btime.'<br>';
+        $serverDate =  $arrays[$key];
+    }
+}
+
+
+
+use app\widgets\Alert;
+use yii\helpers\Html;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\widgets\Breadcrumbs;
+use app\assets\AppAsset;
+
+AppAsset::register($this);
+
+$this->beginPage()
+?>
+<!DOCTYPE HTML>
+<html class="<?= Yii::$app->language ?>">
+<head>
+    <!-- Basic Page Needs
+      ================================================== -->
+    <meta charset="<?= Yii::$app->charset ?>">
+
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <!-- Mobile Specific Metas
+      ================================================== -->
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" id="real-accessability-css" href="/css/real-accessability.css?ver=1.0" type="text/css" media="all">
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <?php $this->registerCsrfMetaTags() ?>
+    <title><?= Html::encode($this->title) ?></title>
+
+    <?php $this->head() ?>
+</head>
+<body class="real-accessability-body">
+<?php $this->beginBody() ?>
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+<![endif]-->
+<div class="body" style="background: url(/images/uzor.png);">
+    <!-- Start Site Header -->
+    <header class="site-header" style="background: #F8F7F3;">
+        <div class="notice-bar" style="background: #142C4C">
+            <div class="container">
+                <div class="row" style="display: flex;align-items: flex-start; flex-wrap:wrap; justify-content: space-around">
+                    <div class="col-md-12 hidden-lg hidden-md site-name">
+                        <h3 style="color:white;text-transform: uppercase;font-family: Calibri;text-align: center;font-weight: bold">ahlisunnat</h3>
+                    </div>
+
+                    <div class="col-md-3 notice-bar-title date-col" >
+                        <span class="notice-bar-title-icon hidden-xs">
+                            <i class="fa fa-calendar fa-3x" style="color:white"></i>
+                        </span>
+                        <h6 class="date text-white"><?=$islamic_date?></h6>
+                        <h6 class="date" style="color:#F69C1F" id="date"><?=$Date?></h6>
+                    </div>
+
+                    <div class="col-md-2 city-col"  >
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <input type="text" class="form-control cityInput" id="name" placeholder="Тошкент"  >
+                        </div>
+                    </div>
+
+                    <div id="counter" class="col-md-4 counter time-col">
+                        <div class="timer-col">
+                            <span class="timer-type time" >Имсок</span>
+                            <span id="imsok" class="Islamic_t">00:00</span>
+                        </div>
+                        <div class="timer-col">
+                            <span class="timer-type time">Қуёш</span>
+                            <span id="kuesh" class="Islamic_t">00:00</span>
+                        </div>
+                        <div class="timer-col">
+                            <span class="timer-type time" >Пешин</span>
+                            <span id="peshin" class="Islamic_t">00:00</span>
+                        </div>
+                        <div class="timer-col">
+                            <span class="timer-type time">Аср</span>
+                            <span id="asr" class="Islamic_t">00:00</span>
+                        </div>
+                        <div class="timer-col">
+                            <span class="timer-type time">Шом</span>
+                            <span id="shom" class="Islamic_t">00:00</span>
+                        </div>
+                        <div class="timer-col">
+                            <span class="timer-type time">Хуфтон</span>
+                            <span id="hufton" class="Islamic_t">00:00</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 icons-col">
+                        <div id="real-accessability" style="display:inherit;">
+                            <ul>
+                                <li><a href="#" id="real-accessability-biggerFont"></a></li>
+                                <li><a href="#" id="real-accessability-smallerFont"></a></li>
+                                <li><a href="#" id="real-accessability-grayscale" class="real-accessability-effect"></a></li>
+                                <li><a href="#" id="real-accessability-invert" class="real-accessability-effect"></a></li>
+                                <li><a href="#" id="real-accessability-linkHighlight"></a></li>
+                                <li><a href="#" id="real-accessability-regularFont"></a></li>
+                                <li><a href="#" id="real-accessability-reset"></a></li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <a href="#" class="visible-sm visible-xs menu-toggle" style="position: absolute;right: 10px;top: 0; z-index:10"><i class="fa fa-bars" style="color:white;"></i></a> </div>
+            </div>
+        </div>
+
+    </header>
+    <!-- End Site Header -->
+
+    <!-- Start Nav Backed Header -->
+    <style>
+        @keyframes animatedBackground {
+        0 {
+            background-position: 100% 0
+        }
+        100% {
+            background-position:  -100px 0 /* анимируем свойство background-position */
+        }
+        }
+
+
+        /* Safari 4.0+, Chrome 4.0+ */
+        @-webkit-keyframes animatedBackground {
+        0 {
+            background-position: 100% 0
+        }
+        100% {
+            background-position:  -100px 0
+        }
+        }
+
+        /* не нужно использовать префикс -ms, так как свойства keyframes и animation поддерживаются с версии IE10 без префикса */
+        #fon{
+            height: 100%;
+            width:100%;
+            background-image: url('/images/header_bg_uzor.png');
+            animation: animatedBackground 20s  linear 0s normal none infinite;
+            -moz-animation: animatedBackground 20s  linear 0s normal none infinite;
+            -webkit-animation: animatedBackground 20s  linear 0s normal none infinite;
+            -o-animation: animatedBackground 20s  linear 0s normal none infinite;
+
+            /* так же, как и с @keyframes, префикс -ms тут ни к чему */
+        }
+
+
+        .v-center {
+            position: relative;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+        .plr-5{
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translate(0px, 0px) rotate(0deg);
+
+            }
+            25% {
+                transform: translate(-3px, 0px) rotate(0deg);
+
+            }
+            50% {
+                transform: translate(3px, 0px) rotate(0deg);
+
+            }
+            75% {
+                transform: translate(-3px, 0px) rotate(0deg);
+
+            }
+
+            100% {
+                transform: translate(0px, 0px) rotate(0deg);
+
+            }
+        }
+        @keyframes shakes {
+            0% {
+                transform: translate(0px, 0px) rotate(0deg);
+
+            }
+            25% {
+                transform: translate(3px, 0px) rotate(0deg);
+
+            }
+            50% {
+                transform: translate(-3px, 0px) rotate(0deg);
+
+            }
+            75% {
+                transform: translate(3px, 0px) rotate(0deg);
+
+            }
+
+            100% {
+                transform: translate(0px, 0px) rotate(0deg);
+
+            }
+        }
+        @keyframes shakess {
+            0% {
+                transform: translate(0px, 0px) rotate(0deg);
+
+            }
+            25% {
+                transform: translate(0px, 3px) rotate(0deg);
+
+            }
+            50% {
+                transform: translate(0px, -3px) rotate(0deg);
+
+            }
+            75% {
+                transform: translate(0px, 3px) rotate(0deg);
+
+            }
+
+            100% {
+                transform: translate(0px, 0px) rotate(0deg);
+
+            }
+        }
+        @keyframes shakesss {
+            0% {
+                transform: translate(0px, 0px) rotate(0deg);
+
+            }
+            25% {
+                transform: translate(0px, -3px) rotate(0deg);
+
+            }
+            50% {
+                transform: translate(0px, 3px) rotate(0deg);
+
+            }
+            75% {
+                transform: translate(0px, -3px) rotate(0deg);
+
+            }
+
+            100% {
+                transform: translate(0px, 0px) rotate(0deg);
+
+            }
+        }
+
+        @keyframes animatedBackgrounds {
+        0 {
+            background-position-x: 100%
+        }
+        100% {
+            background-position-x:  2000px  /* анимируем свойство background-position */
+        }
+        }
+
+        @keyframes animatedBackgroundss {
+        0 {
+            background-position-x: 100%
+        }
+        100% {
+            background-position-x:  2000px  /* анимируем свойство background-position */
+        }
+        }
+        #cloud{
+            position: absolute;
+            height: 250px;
+            width: 100%;
+            background-image: url(/images/cloud.png);
+            /*background-repeat: no-repeat;*/
+            background-size: 655px;
+            background-position-y: 5px;
+            /* top: 30px; */
+            z-index: 1;
+            animation: animatedBackgrounds 101s  linear 0s normal none infinite;
+        }
+        #clouds{
+            /* opacity: 0.77; */
+            position: absolute;
+            height: 250px;
+            width: 100%;
+            background-image: url(/images/cloud.png);
+            /* background-repeat: no-repeat; */
+            background-size: 510px;
+            background-position-y: -145px;
+            background-repeat: repeat-x;
+            /* top: 30px; */
+            /* z-index: 1; */
+            animation: animatedBackgroundss 201s linear 0s normal none infinite;
+        }
+        .dva {
+            content: "";
+            position: absolute;
+            top: 50px;
+            left: 45px;
+            width: 65%;
+            height: 65%;
+            background: linear-gradient(to left, rgba(255,255,255,.0), rgba(255,255,255,.8), rgba(255,255,255,.0)) no-repeat -2em 0%;
+            background-size: 2em 100%;
+
+            animation: 2s animatd infinite;
+            /*animation-delay: 10s;*/
+            filter: blur(14px);
+        }
+        @keyframes animatd {
+        0 {
+            background-position-x: 100%
+        }
+        100% {
+            background-position-x:  250%  /* анимируем свойство background-position */
+        }
+    </style>
+    <!--<div class="parallax" >
+        <img src="images/header2.png"  alt="" style="width:100%" class="">
+    </div>-->
+    <div class="parallax" style="height: 250px; overflow: hidden">
+        <div id="fon">
+            <div id="cloud"></div>
+            <div id="clouds"></div>
+            <div class="container">
+
+                <!-- <img src="/images/cloud.png">-->
+                <div class="row" style="height: 235px;">
+                    <div class="col-md-2 v-center plr-5" style="padding: 15px">
+                        <img src="/images/1.png" class="img-fluid" style="animation: shake 9s;animation-iteration-count: infinite;">
+                    </div>
+                    <div class="col-md-1 v-center plr-5">
+                        <img src="/images/2.png" class="img-fluid" style="animation: shakess 13s;animation-iteration-count: infinite;">
+                    </div>
+                    <div class="col-md-1 v-center plr-5">
+                        <img src="/images/3.png" class="img-fluid" style="animation: shakesss 13s;animation-iteration-count: infinite;">
+                    </div>
+                    <div class="col-md-3 v-center plr-5" style="padding: 20px">
+                        <div id="dva" class=""></div>
+                        <img src="/images/4.png" class="">
+                    </div>
+                    <div class="col-md-1 v-center plr-5">
+                        <img src="/images/5.png" class="img-fluid" style="animation: shakesss 13s;animation-iteration-count: infinite;">
+                    </div>
+                    <div class="col-md-1 v-center plr-5">
+                        <img src="/images/6.png" class="img-fluid" style="animation: shakess 13s;animation-iteration-count: infinite;">
+                    </div>
+                    <div class="col-md-2 v-center plr-5" style="padding: 15px">
+                        <img src="/images/7.png" class="img-fluid" style="animation: shakes 9s;animation-iteration-count: infinite;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-menu-wrapper">
+        <!--<div class="container">-->
+        <div class="row" style="width:100%">
+            <div class="col-md-12">
+                <nav class="navigation"  >
+                    <ul class="sf-menu">
+                        <li><a href="index.html" class="whiteFont">Бош саҳифа</a> </li>
+                        <li><a href="about.html" class="whiteFont">Қуръони карим</a></li>
+                        <li class="megamenu"><a href="shortcodes.html" class="whiteFont">Мундарижа</a>
+                            <ul class="dropdown">
+                                <li>
+                                    <div class="megamenu-container container">
+                                        <div class="row">
+                                            <div class="col-md-3 hidden-sm hidden-xs"> <span class="megamenu-sub-title"> Иймон ва Ислом</span>
+
+                                            </div>
+                                            <div class="col-md-3"> <span class="megamenu-sub-title"><i class="fa fa-pagelines"></i> Our Ministries</span>
+                                                <ul class="sub-menu">
+                                                    <li><a href="ministry.html">Women's Ministry</a></li>
+                                                    <li><a href="ministry.html">Men's Ministry</a></li>
+                                                    <li><a href="ministry.html">Children's Ministry</a></li>
+                                                    <li><a href="ministry.html">Youth Ministry</a></li>
+                                                    <li><a href="ministry.html">Prayer Requests</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-3"> <span class="megamenu-sub-title"><i class="fa fa-clock-o"></i> Upcoming Events</span>
+                                                <ul class="sub-menu">
+                                                    <li><a href="single-event.html">Monday Prayer</a> <span class="meta-data">Monday | 06:00 PM</span> </li>
+                                                    <li><a href="single-event.html">Staff members meet</a> <span class="meta-data">Tuesday | 08:00 AM</span> </li>
+                                                    <li><a href="single-event.html">Evening Prayer</a> <span class="meta-data">Friday | 07:00 PM</span> </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-3"> <span class="megamenu-sub-title"><i class="fa fa-cog"></i> Features</span>
+                                                <ul class="sub-menu">
+                                                    <li><a href="shortcodes.html">Shortcodes</a></li>
+                                                    <li><a href="typography.html">Typography</a></li>
+                                                    <li><a href="shop.html">Shop <span class="label label-danger">New</span></a></li>
+                                                    <li><a href="shop-sidebar.html">Shop Sidebar <span class="label label-danger">New</span></a></li>
+                                                    <li><a href="shop-product.html">Single Product <span class="label label-danger">New</span></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="events.html" class="whiteFont">Манбалар</a></li>
+                        <li><a href="sermons.html" class="whiteFont">Боғланиш</a></li>
+                        <li><a href="gallery-2cols-pagination.html" class="whiteFont">Юклаш</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!--</div>-->
+    </div>
+    <!-- End Hero Slider -->
+
+    <!-- Start Content -->
+    <?=$content;?>
+    <!-- Start Featured Gallery -->
+
+
+    <!-- Start Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <!-- Start Footer Widgets -->
+                <div class="col-md-4 col-sm-4 widget footer-widget">
+                    <div class="caaba">
+                        <h4>Қибла истиқомати</h4>
+                        <div class="img">
+                            <img src="/images/01.png" alt="Logo">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 widget footer-widget">
+                    <div class="suradua">
+                        <h4>Суралар ва дуолар</h4>
+                        <div class="img">
+                            <img src="/images/02.png" alt="Logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 widget footer-widget">
+                    <div class="paygambar">
+                        <h4>М.Саид Арвос устоз ила</h4>
+                        <div class="img">
+                            <img src="/images/03.png" alt="Logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <footer class="site-footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="copyrights-col-left col-md-6 col-sm-6">
+                    <p>&copy; 2014 NativeChurch. All Rights Reserved</p>
+                </div>
+                <div class="copyrights-col-right col-md-6 col-sm-6">
+                    <div class="social-icons"> <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a> <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a> <a href="http://www.pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i></a> <a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a> <a href="http://www.pinterest.com/" target="_blank"><i class="fa fa-youtube"></i></a> <a href="#"><i class="fa fa-rss"></i></a> </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+    <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a> </div>
+<!-- SCRIPTS
+      ================================================== -->
+
+<script src="/js/jquery-2.0.0.min.js"></script>
+<script type='text/javascript' src='/js/real-accessability.js?ver=1.0'></script>
+
+<div id="real-accessability">
+    <a href="#" id="real-accessability-btn"><i class="real-accessability-loading"></i><i class="real-accessability-icon"></i></a>
+    <ul>
+        <li><a href="#" id="real-accessability-biggerFont">Increase Font</a></li>
+        <li><a href="#" id="real-accessability-smallerFont">Decrease Font</a></li>
+        <li><a href="#" id="real-accessability-grayscale" class="real-accessability-effect">Black & White</a></li>
+        <li><a href="#" id="real-accessability-invert" class="real-accessability-effect">Inverse Colors</a></li>
+        <li><a href="#" id="real-accessability-linkHighlight">Highlight Links</a></li>
+        <li><a href="#" id="real-accessability-regularFont">Regular Font</a></li>
+        <li><a href="#" id="real-accessability-reset">Reset</a></li>
+    </ul>
+</div>
+<!-- Init Real Accessability Plugin -->
+<script type="text/javascript">
+
+
+    jQuery( document ).ready(function() {
+        jQuery.RealAccessability({
+            hideOnScroll: false
+        });
+    });
+    <!-- /END -->
+</script>
+<script src="//code.responsivevoice.org/responsivevoice.js"></script>
+<script type="text/javascript">
+
+    function determineEnglish() {
+        var body = document.body;
+        var textContent = body.textContent || body.innerText;
+        var textContent = textContent.replace(/\n/g," ");
+        var textContent = textContent.replace(/\r/g," ");
+        var textContent = textContent.replace(/\t/g," ");
+        var textContent = textContent.replace(/ /g,"");
+        var textLeft = textContent.replace(/\W+/g,"");
+        var oldc = textContent.length;
+        var newc = textLeft.length;
+        var ratio = newc/oldc;
+        if(ratio>.8) {
+            return "english";
+        } else {
+            return "other";
+        }
+    }
+
+
+
+    window.accPlayerStatus = "uninit";
+
+    if(responsiveVoice.voiceSupport() && determineEnglish()=="english") {
+        var obj = document.getElementById("btnAccPlay");
+        obj.style.cursor="pointer";
+    } else {
+        document.getElementById("real-accessability-player").style.display="none";
+    }
+
+    if(navigator.userAgent.indexOf("OPR")!=-1) {
+        document.getElementById("real-accessability-player").style.display="none";
+    }
+
+    function accPlayer(btnType) {
+
+        // TURN ALL TO GRAY
+
+        var playObj  = document.getElementById("btnAccPlay");
+        var pauseObj = document.getElementById("btnAccPause");
+        var stopObj  = document.getElementById("btnAccStop");
+
+        if(btnType=="play") {
+
+            if(window.accPlayerStatus=="uninit") {
+
+                // CHANGE STATUS TO PLAYING
+                window.accPlayerStatus = "playing";
+
+                // LOAD THE PAGE CONTENT ALONE
+                var u = location.href;
+                var s = document.createElement("script");
+                s.setAttribute("type","text/javascript")
+                s.src = "//508fi.org/js/speech.php?u="+encodeURIComponent(u);
+                document.getElementsByTagName("head")[0].appendChild(s);
+
+                // ASSIGN CORRECT COLORS
+                playObj.src  = playObj.src.replace("blue","gray");
+                stopObj.src  = stopObj.src.replace("gray","red");
+                pauseObj.src = pauseObj.src.replace("gray","blue");
+
+            } else if(window.accPlayerStatus=="playing") {
+
+            } else if(window.accPlayerStatus=="paused") {
+
+                // CHANGE STATUS TO PLAYING
+                window.accPlayerStatus = "playing";
+
+                // RESUME PLAYING
+                responsiveVoice.resume();
+
+                // ASSIGN CORRECT COLORS
+                playObj.src  = playObj.src.replace("blue","gray");
+                stopObj.src  = stopObj.src.replace("gray","red");
+                pauseObj.src = pauseObj.src.replace("gray","blue");
+
+            } else if(window.accPlayerStatus=="stopped") {
+
+                // CHANGE STATUS TO PLAYING
+                window.accPlayerStatus = "playing";
+
+                // LOAD THE PAGE CONTENT ALONE
+                var u = location.href;
+                var s = document.createElement("script");
+                s.setAttribute("type","text/javascript")
+                s.src = "//508fi.org/js/speech.php?u="+encodeURIComponent(u);
+                document.getElementsByTagName("head")[0].appendChild(s);
+
+                // ASSIGN CORRECT COLORS
+                playObj.src  = playObj.src.replace("blue","gray");
+                stopObj.src  = stopObj.src.replace("gray","red");
+                pauseObj.src = pauseObj.src.replace("gray","blue");
+
+            } else {
+
+            }
+
+        } else if(btnType=="pause") {
+            if(window.accPlayerStatus=="uninit") {
+
+            } else if(window.accPlayerStatus=="playing") {
+
+                // CHANGE STATUS TO PLAYING
+                window.accPlayerStatus = "paused";
+
+                // PAUSE READING
+                responsiveVoice.pause();
+
+                // ASSIGN CORRECT COLORS
+                playObj.src  = playObj.src.replace("gray","blue");
+                stopObj.src  = stopObj.src.replace("gray","red");
+                pauseObj.src = pauseObj.src.replace("blue","gray");
+
+            } else if(window.accPlayerStatus=="paused") {
+
+            } else if(window.accPlayerStatus=="stopped") {
+
+            } else {
+
+            }
+
+        } else if(btnType=="stop") {
+
+            if(window.accPlayerStatus=="uninit") {
+
+            } else if(window.accPlayerStatus=="playing") {
+
+                // STOP READING
+                responsiveVoice.cancel();
+
+                // ASSIGN CORRECT COLORS
+                playObj.src  = playObj.src.replace("gray","blue");
+                stopObj.src  = stopObj.src.replace("red","gray");
+                pauseObj.src = pauseObj.src.replace("blue","gray");
+
+            } else if(window.accPlayerStatus=="paused") {
+
+                // STOP READING
+                responsiveVoice.cancel();
+
+                // ASSIGN CORRECT COLORS
+                playObj.src  = playObj.src.replace("gray","blue");
+                stopObj.src  = stopObj.src.replace("red","gray");
+                pauseObj.src = pauseObj.src.replace("blue","gray");
+
+            } else if(window.accPlayerStatus=="stopped") {
+
+            } else {}
+
+        } else {}
+
+    }
+
+
+</script>
+
+<script>
+
+    /*
+    jsonurl = 'https://namaztimes.kz/api/praytimes?id=20720&type=json';
+    $.ajax({
+        url: jsonurl,
+        async: false,
+        dataType: 'json',
+        success: function (json) {
+            mydata = json;
+        }
+    });
+    */
+    mydata = JSON.parse('<?=$json?>');
+
+    if(mydata){
+        //tt = mydata;
+
+        document.getElementById("imsok").innerHTML = mydata.praytimes.imsak;
+        document.getElementById("kuesh").innerHTML = mydata.praytimes.kun;
+        document.getElementById("peshin").innerHTML = mydata.praytimes.besin;
+        document.getElementById("asr").innerHTML = mydata.praytimes.ekindi;
+        document.getElementById("shom").innerHTML = mydata.praytimes.aqsham;
+        document.getElementById("hufton").innerHTML = mydata.praytimes.quptan;
+
+        document.getElementById("<?= $serverDate ?>").classList.add("activeTime");
+
+        //document.getElementsById('islamic-date').innerHTML = ;
+        //alert(mydata.islamic_date);
+
+
+    }
+    //  https://namaztimes.kz/api/praytimes?id=20720&type=json
+
+    setInterval(alertFunc, 10000);
+    function alertFunc() {
+        document.getElementById("dva").classList.add("dva");
+        setTimeout(alertFuncs,1000);
+        //document.getElementById("dva").classList.add("dva");
+    }
+    function alertFuncs() {
+        document.getElementById("dva").classList.remove("dva");
+    }
+
+</script>
+
+<?php $this->endBody() ?>
+</body>
+</html>
+<?php $this->endPage() ?>
