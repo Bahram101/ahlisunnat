@@ -4,12 +4,12 @@ namespace app\modules\admin\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\Article;
+use app\modules\admin\models\Category;
 
 /**
- * CategorySearch represents the model behind the search form of `app\modules\admin\models\Article`.
+ * CategorySearch represents the model behind the search form of `app\modules\admin\models\Category`.
  */
-class CategorySearch extends Article
+class CategorySearch extends Category
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class CategorySearch extends Article
     public function rules()
     {
         return [
-            [['id', 'catalog_id', 'hits', 'on_main_page'], 'integer'],
-            [['title', 'introtext', 'text', 'created', 'modified'], 'safe'],
+            [['id'], 'integer'],
+            [['title', 'parent_id', 'link'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class CategorySearch extends Article
      */
     public function search($params)
     {
-        $query = Article::find();
+        $query = Category::find();
 
         // add conditions that should always apply here
 
@@ -59,16 +59,11 @@ class CategorySearch extends Article
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'catalog_id' => $this->catalog_id,
-            'created' => $this->created,
-            'modified' => $this->modified,
-            'hits' => $this->hits,
-            'on_main_page' => $this->on_main_page,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'introtext', $this->introtext])
-            ->andFilterWhere(['like', 'text', $this->text]);
+            ->andFilterWhere(['like', 'parent_id', $this->parent_id])
+            ->andFilterWhere(['like', 'link', $this->link]);
 
         return $dataProvider;
     }
