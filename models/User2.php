@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
+class User2 extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 {
     public $id;
     public $username;
@@ -11,20 +11,14 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public $accessToken;
 
     private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
+        '1' => [
+            'id' => '1',
+            'username' => 'bahram',
+            'password' => '123456',
             'authKey' => 'test100key',
             'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
+        ]
+
     ];
 
 

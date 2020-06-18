@@ -55,4 +55,7 @@ class Article extends \yii\db\ActiveRecord{
             'on_main_page' => 'On Main Page',
         ];
     }
+
+
+
 }

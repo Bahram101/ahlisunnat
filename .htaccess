@@ -13,6 +13,8 @@ RewriteRule ^books/(.*)$ web/books/$1 [L]
 RewriteRule ^widget/(.*)$ web/widget/$1 [L]
 RewriteRule (.*) /web/$1
 
+RewriteCond %{REQUEST_FILENAME} @2x\.[a-z]+$
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /web/index.php

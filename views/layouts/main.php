@@ -530,6 +530,7 @@ $this->beginPage()
       ================================================== -->
 
 <script src="/js/jquery-2.0.0.min.js"></script>
+
 <script type='text/javascript' src='/js/real-accessability.js?ver=1.0'></script>
 
 <div id="real-accessability">

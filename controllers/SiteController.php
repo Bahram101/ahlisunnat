@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Article;
 use Yii;
+use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -15,15 +17,14 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function init()
-    {
+    /*public function init(){
         parent::init();
         Yii::$app->assetManager->bundles = [
             'yii\bootstrap\BootstrapPluginAsset' => false,
             'yii\bootstrap\BootstrapAsset' => false,
             'yii\web\JqueryAsset' => false,
         ];
-    }
+    }*/
 
     public function behaviors()
     {
@@ -48,9 +49,7 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
     public function actions()
     {
         return [
@@ -64,24 +63,26 @@ class SiteController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
 
-        return $this->render('index');
+    public function actionIndex(){
+        $query = Article::find();
+        $pages = new Pagination([
+            'totalCount' => $query->count(),
+            'pageSize' => 3,
+            'forcePageParam' => false,
+            'pageSizeParam' => false
+        ]);
+        $articles = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->orderBy(['id' => SORT_DESC])
+            ->asArray()
+            ->with('category')
+            ->all();
+        return $this->render('index', compact('articles', 'pages'));
     }
 
-    /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
+
+    public function actionLogin(){
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -97,11 +98,7 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
+
     public function actionLogout()
     {
         Yii::$app->user->logout();
@@ -109,11 +106,7 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-     */
+
     public function actionContact()
     {
         $model = new ContactForm();
@@ -127,11 +120,7 @@ class SiteController extends Controller
         ]);
     }
 
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
+
     public function actionAbout()
     {
         return $this->render('about');

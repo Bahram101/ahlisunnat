@@ -112,6 +112,10 @@ footer .footer-widget{
     border-radius: 2px;
 }
 
+body .container{
+    /*background: white;*/
+}
+
 @media(max-width:619px){
     .site-header .menu-toggle{
         margin: 16px 10px 0 0;
