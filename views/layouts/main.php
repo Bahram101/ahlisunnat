@@ -422,7 +422,7 @@ $this->beginPage()
             <div class="col-md-12">
                 <nav class="navigation"  >
                     <ul class="sf-menu">
-                        <li><a href="index.html" class="whiteFont">Бош саҳифа</a> </li>
+                        <li><a href="/" class="whiteFont">Бош саҳифа</a> </li>
                         <li><a href="about.html" class="whiteFont">Қуръони карим</a></li>
                         <li class="megamenu"><a href="shortcodes.html" class="whiteFont">Мундарижа</a>
                             <ul class="dropdown">

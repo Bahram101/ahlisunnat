@@ -81,6 +81,13 @@ class SiteController extends Controller
         return $this->render('index', compact('articles', 'pages'));
     }
 
+    public function actionArticle($id){
+        $id = (int)$id;
+        $article = Article::find()->where(['id'=>$id])->asArray()->one();
+
+        return $this->render('article', compact('article'));
+    }
+
 
     public function actionLogin(){
         if (!Yii::$app->user->isGuest) {
