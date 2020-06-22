@@ -18,7 +18,6 @@ $config = [
             'class' => 'app\modules\admin\Module',
             'layout' => 'main',
         ],
-
     ],
 
     'components' => [
@@ -31,7 +30,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User2',
+            'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -59,13 +58,11 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                //'admin' => 'admin/article/index',
                 ''=>'site/index',
-
-                //'article/<id:\d+>'=>'site/article/<id:\d+>',
-               // 'admin/<controller>/<id:\d+>' => 'adm/<controller>/view',
                 'article/<id:\d+>' => 'site/article',
-                '<action>'=>'site/<action>',
+                'category/<id:\d+>/page/<page:\d+>' => 'site/category',
+                'category/<id:\d+>' => 'site/category',
+                'sources' => 'site/sources'
             ],
         ],
 

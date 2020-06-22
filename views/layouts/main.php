@@ -423,46 +423,99 @@ $this->beginPage()
                 <nav class="navigation"  >
                     <ul class="sf-menu">
                         <li><a href="/" class="whiteFont">Бош саҳифа</a> </li>
-                        <li><a href="about.html" class="whiteFont">Қуръони карим</a></li>
-                        <li class="megamenu"><a href="shortcodes.html" class="whiteFont">Мундарижа</a>
+                        <li><a href="/quran" class="whiteFont">Қуръони карим</a></li>
+                        <li class="megamenu"><a href="" class="whiteFont">Мундарижа</a>
                             <ul class="dropdown">
                                 <li>
                                     <div class="megamenu-container container">
                                         <div class="row">
-                                            <div class="col-md-3 hidden-sm hidden-xs"> <span class="megamenu-sub-title"> Иймон ва Ислом</span>
+                                            <div class="col-md-3"> <span class="megamenu-sub-title"><a href="/category/1">Иймон ва Ислом</a></span>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/2">Намоз</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/3">Қуръони Карим</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/4">Пайғамбаримиз</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/5">Бошқа динлар</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/6">Мазҳаб ва мазҳабсизлик</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/7">Суннат - Бидъат</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3"> <span class="megamenu-sub-title"><a href="/category/8">Адашган оқимлар</a></span>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/9">Суҳбатлар</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/10">Таҳорат - Ғусл</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/11">Одоб-Ахлоқ</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/12">Ҳайз</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/13">Ибратли воқеалар</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/14">Рўза</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3"> <span class="megamenu-sub-title"><a href="/category/15">Закот - Ушр - Садақа</a></span>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/16">Ҳаж</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/17">Қурбонлик</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/18">Савдо-Сотиқ</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/19">Ҳалол - Ҳаром</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/20">Никоҳ ва Оила</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/21">Қийматли вақтлар</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3"> <span class="megamenu-sub-title"><a href="/category/22">Керакли дуолар</a></span>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/23">Ислом олимлари</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/24">Бошқа мавзулар</a></span>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <span class="megamenu-sub-title"><a href="/category/29">Рамазон жадваллари</a></span>
+                                                    </div>
 
+                                                </div>
                                             </div>
-                                            <div class="col-md-3"> <span class="megamenu-sub-title"><i class="fa fa-pagelines"></i> Our Ministries</span>
-                                                <ul class="sub-menu">
-                                                    <li><a href="ministry.html">Women's Ministry</a></li>
-                                                    <li><a href="ministry.html">Men's Ministry</a></li>
-                                                    <li><a href="ministry.html">Children's Ministry</a></li>
-                                                    <li><a href="ministry.html">Youth Ministry</a></li>
-                                                    <li><a href="ministry.html">Prayer Requests</a></li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-3"> <span class="megamenu-sub-title"><i class="fa fa-clock-o"></i> Upcoming Events</span>
-                                                <ul class="sub-menu">
-                                                    <li><a href="single-event.html">Monday Prayer</a> <span class="meta-data">Monday | 06:00 PM</span> </li>
-                                                    <li><a href="single-event.html">Staff members meet</a> <span class="meta-data">Tuesday | 08:00 AM</span> </li>
-                                                    <li><a href="single-event.html">Evening Prayer</a> <span class="meta-data">Friday | 07:00 PM</span> </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-md-3"> <span class="megamenu-sub-title"><i class="fa fa-cog"></i> Features</span>
-                                                <ul class="sub-menu">
-                                                    <li><a href="shortcodes.html">Shortcodes</a></li>
-                                                    <li><a href="typography.html">Typography</a></li>
-                                                    <li><a href="shop.html">Shop <span class="label label-danger">New</span></a></li>
-                                                    <li><a href="shop-sidebar.html">Shop Sidebar <span class="label label-danger">New</span></a></li>
-                                                    <li><a href="shop-product.html">Single Product <span class="label label-danger">New</span></a></li>
-                                                </ul>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="events.html" class="whiteFont">Манбалар</a></li>
+                        <li><a href="/sources" class="whiteFont">Манбалар</a></li>
                         <li><a href="sermons.html" class="whiteFont">Боғланиш</a></li>
                         <li><a href="gallery-2cols-pagination.html" class="whiteFont">Юклаш</a></li>
                     </ul>

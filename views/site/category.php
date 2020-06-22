@@ -17,50 +17,28 @@ use yii\widgets\LinkPager;
                             </span>
                         </div>
                     </div>
-                    <? if(isset($articlesForMainPage)):?>
-                        <? foreach ($articlesForMainPage as $article):?>
+
+                    <? foreach ($articles as $article):?>
                         <article class="post ">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                     <h4><a href="/article/<?=Html::encode($article['id'])?>"><?= Html::encode($article['title'])?></a></h4>
                                     <span class="post-meta meta-data">
-                                        <span><i class="fa fa-archive"></i> <a href="#"><?=$article['category']['title']?></a></span>
-                                        <span><i class="fa fa-calendar"></i> <?= $article['created']?></span>
-
-                                        <!--<span><a href="#"><i class="fa fa-comment"></i> 12</a></span>-->
-                                    </span>
+                                    <span><i class="fa fa-archive"></i> <a href="#"><?=$article['category']['title']?></a></span>
+                                    <span><i class="fa fa-calendar"></i> <?= $article['created']?></span>
+                                </span>
                                     <p class="justify-content" style="text-align: justify"><?= $article['introtext']?></p>
 
                                     <p style="float:right"><a href="#" class="btn btn-primary batafsil">Батафсил <i class="fa fa-long-arrow-right"></i></a></p>
                                 </div>
                             </div>
                         </article>
-                        <? endforeach ?>
-                    <? endif ?>
-
-                    <? foreach ($articles as $article):?>
-                    <article class="post ">
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <h4><a href="/article/<?=Html::encode($article['id'])?>"><?= Html::encode($article['title'])?></a></h4>
-                                <span class="post-meta meta-data">
-                                    <span><i class="fa fa-archive"></i> <a href="#"><?=$article['category']['title']?></a></span>
-                                    <span><i class="fa fa-calendar"></i> <?= $article['created']?></span>
-
-<!--                                    <span><a href="#"><i class="fa fa-comment"></i> 12</a></span>-->
-                                </span>
-                                <p class="justify-content" style="text-align: justify"><?= $article['introtext']?></p>
-
-                                <p style="float:right"><a href="#" class="btn btn-primary batafsil">Батафсил <i class="fa fa-long-arrow-right"></i></a></p>
-                            </div>
-                        </div>
-                    </article>
                     <? endforeach?>
 
                     <?=
-                        LinkPager::widget([
-                            'pagination' => $pages
-                        ])
+                    LinkPager::widget([
+                        'pagination' => $pages
+                    ])
                     ?>
                 </div>
                 <!-- Start Sidebar -->

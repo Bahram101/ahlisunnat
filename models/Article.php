@@ -40,5 +40,9 @@ class Article extends \yii\db\ActiveRecord{
         ];
     }
 
+    public static function articlesForMainPage($limit = 3){
+        return Article::find()->where(['on_main_page'=>1])->with('category')->orderBy('modified desc')->limit($limit)->asArray()->all();
+    }
+
 
 }

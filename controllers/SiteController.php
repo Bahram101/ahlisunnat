@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\Article;
+use app\models\Category;
+use app\models\Quran;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -12,11 +14,8 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
-class SiteController extends Controller
-{
-    /**
-     * {@inheritdoc}
-     */
+class SiteController extends Controller{
+
     /*public function init(){
         parent::init();
         Yii::$app->assetManager->bundles = [
@@ -26,8 +25,7 @@ class SiteController extends Controller
         ];
     }*/
 
-    public function behaviors()
-    {
+    public function behaviors(){
         return [
             'access' => [
                 'class' => AccessControl::className(),
@@ -50,8 +48,7 @@ class SiteController extends Controller
     }
 
 
-    public function actions()
-    {
+    public function actions(){
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -65,6 +62,7 @@ class SiteController extends Controller
 
 
     public function actionIndex(){
+        $articlesForMainPage = Article::articlesForMainPage();
         $query = Article::find();
         $pages = new Pagination([
             'totalCount' => $query->count(),
@@ -72,20 +70,31 @@ class SiteController extends Controller
             'forcePageParam' => false,
             'pageSizeParam' => false
         ]);
-        $articles = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->orderBy(['id' => SORT_DESC])
-            ->asArray()
-            ->with('category')
-            ->all();
-        return $this->render('index', compact('articles', 'pages'));
+        $articles = $query->offset($pages->offset)->limit($pages->limit)->orderBy(['id' => SORT_DESC])->asArray()->with('category')->all();
+
+        return $this->render('index', compact('articles', 'pages', 'articlesForMainPage'));
     }
+
 
     public function actionArticle($id){
         $id = (int)$id;
         $article = Article::find()->where(['id'=>$id])->asArray()->one();
 
         return $this->render('article', compact('article'));
+    }
+
+    public function actionCategory($id){
+        $id = (int)$id;
+        $query = Article::find()->where(['catalog_id'=>$id]);
+        $pages = new Pagination([
+            'totalCount' => $query->count(),
+            'pageSize' => 10,
+            'forcePageParam' => false,
+            'pageSizeParam' => false
+        ]);
+        $articles = $query->offset($pages->offset)->limit($pages->limit)->orderBy(['id' => SORT_DESC])->asArray()->with('category')->all();
+
+        return $this->render('category', compact('articles', 'pages'));
     }
 
 
@@ -128,8 +137,7 @@ class SiteController extends Controller
     }
 
 
-    public function actionAbout()
-    {
-        return $this->render('about');
+    public function actionSources(){
+        return $this->render('sources');
     }
 }
