@@ -8,6 +8,8 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'uz-UZ',
+    'sourceLanguage' => 'uz',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -17,6 +19,7 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
             'layout' => 'main',
+            'defaultRoute'=> 'article/index',
         ],
     ],
 
@@ -62,7 +65,8 @@ $config = [
                 'article/<id:\d+>' => 'site/article',
                 'category/<id:\d+>/page/<page:\d+>' => 'site/category',
                 'category/<id:\d+>' => 'site/category',
-                'sources' => 'site/sources'
+                'sources' => 'site/sources',
+                'questions' => 'site/question'
             ],
         ],
 

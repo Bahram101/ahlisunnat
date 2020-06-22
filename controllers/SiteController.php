@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Article;
 use app\models\Category;
+use app\models\Questions;
 use app\models\Quran;
 use Yii;
 use yii\data\Pagination;
@@ -123,8 +124,7 @@ class SiteController extends Controller{
     }
 
 
-    public function actionContact()
-    {
+    public function actionContact(){
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
@@ -135,6 +135,22 @@ class SiteController extends Controller{
             'model' => $model,
         ]);
     }
+    public function actionQuestion(){
+        $model = new Questions();
+        /*if(Yii::$app->request->isPost){
+            var_dump(Yii::$app->request->post());die;
+        }*/
+        if ($model->load(Yii::$app->request->post())) {
+            $model->sendQuestion();
+            Yii::$app->session->setFlash('success', 'Саволингиз муваффақиятли юборилди!');
+            return $this->redirect(['/questions']);
+        }
+        return $this->render('questions', [
+            'model' => $model,
+        ]);
+    }
+
+
 
 
     public function actionSources(){
