@@ -243,6 +243,12 @@ body .container{
 
 }
 
+@media(min-width:768px){
+    .site-books article .col-md-8{
+        padding-left: 0;
+    }
+}
+
 @media(max-width:767px){
     .sidebar{
         margin-top: 0;

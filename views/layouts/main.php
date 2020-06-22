@@ -516,8 +516,8 @@ $this->beginPage()
                             </ul>
                         </li>
                         <li><a href="/sources" class="whiteFont">Манбалар</a></li>
-                        <li><a href="sermons.html" class="whiteFont">Боғланиш</a></li>
-                        <li><a href="gallery-2cols-pagination.html" class="whiteFont">Юклаш</a></li>
+                        <li><a href="/questions" class="whiteFont">Боғланиш</a></li>
+                        <li><a href="/books" class="whiteFont">Юклаш</a></li>
                     </ul>
                 </nav>
             </div>

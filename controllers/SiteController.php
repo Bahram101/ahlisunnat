@@ -116,15 +116,13 @@ class SiteController extends Controller{
     }
 
 
-    public function actionLogout()
-    {
+    public function actionLogout(){
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 
 
-    public function actionContact(){
+    /*public function actionContact(){
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
@@ -134,7 +132,13 @@ class SiteController extends Controller{
         return $this->render('contact', [
             'model' => $model,
         ]);
+    }*/
+
+    public function actionSources(){
+        return $this->render('sources');
     }
+
+
     public function actionQuestion(){
         $model = new Questions();
         /*if(Yii::$app->request->isPost){
@@ -145,15 +149,17 @@ class SiteController extends Controller{
             Yii::$app->session->setFlash('success', 'Саволингиз муваффақиятли юборилди!');
             return $this->redirect(['/questions']);
         }
+
         return $this->render('questions', [
             'model' => $model,
         ]);
     }
 
-
-
-
-    public function actionSources(){
-        return $this->render('sources');
+    public function actionBooks(){
+        return $this->render('books');
     }
+
+
+
+
 }

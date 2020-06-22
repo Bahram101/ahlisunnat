@@ -19,11 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="col-md-9 posts-archive">
                     <h1><?= Html::encode($this->title) ?></h1>
 
-<!--                    --><?php //if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
-
-<!--                    --><?php //else: ?><!--                      -->
-
-
                         <? if(Yii::$app->session->hasFlash('success')):?>
                             <div class="alert alert-success alert-dismissable">
                                 <?php echo Yii::$app->session->getFlash('success'); ?>
@@ -37,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
 
                                 <?= $form->field($model, 'email') ?>
-                                <span>Ҳурматли ўқувчи! Савол юбораётганингизда ўз Email адресингизни ёзишни унутманг. Акс ҳолда биз сизга жавобни юбора олмаймиз.</span>
+                                <span style="margin-bottom: 20px; display: block;color:#e74c3c">Ҳурматли ўқувчи! Савол юбораётганингизда ўз Email адресингизни ёзишни унутманг. Акс ҳолда биз сизга жавобни юбора олмаймиз.</span>
 
                                 <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 

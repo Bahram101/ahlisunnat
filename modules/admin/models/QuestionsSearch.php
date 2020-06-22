@@ -18,29 +18,21 @@ class QuestionsSearch extends Questions
     {
         return [
             [['id'], 'integer'],
-            [['name', 'email', 'content'], 'safe'],
+            [['name', 'email', 'created_at', 'content'], 'safe'],
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function scenarios()
-    {
+    public function scenarios(){
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
-    public function search($params)
-    {
-        $query = Questions::find();
+
+    public function search($params){
+        $query = Questions::find()->orderBy('id desc');
 
         // add conditions that should always apply here
 
@@ -63,6 +55,7 @@ class QuestionsSearch extends Questions
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'email', $this->email])
+//            ->andFilterWhere(['like', 'created_at', $this->created_at])
             ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;

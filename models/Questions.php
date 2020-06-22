@@ -26,6 +26,7 @@ class Questions extends \yii\db\ActiveRecord
         return [
             [['content', 'email', 'name'], 'required'],
             [['name'], 'string', 'max' => 500],
+            [['created_at'], 'save'],
             [['email'], 'email'],
         ];
     }
@@ -36,6 +37,7 @@ class Questions extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Исм',
             'email' => 'Email',
+            'created_at' => 'Дата',
             'content' => 'Савол',
         ];
     }

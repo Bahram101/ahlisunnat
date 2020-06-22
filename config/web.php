@@ -66,7 +66,8 @@ $config = [
                 'category/<id:\d+>/page/<page:\d+>' => 'site/category',
                 'category/<id:\d+>' => 'site/category',
                 'sources' => 'site/sources',
-                'questions' => 'site/question'
+                'questions' => 'site/question',
+                'books' => 'site/books'
             ],
         ],
 
