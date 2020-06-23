@@ -4,12 +4,15 @@ namespace app\controllers;
 
 use app\models\Article;
 use app\models\Category;
+use app\models\Mailer;
 use app\models\Questions;
 use app\models\Quran;
+use app\models\Subscribers;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -73,8 +76,28 @@ class SiteController extends Controller{
         ]);
         $articles = $query->offset($pages->offset)->limit($pages->limit)->orderBy(['id' => SORT_DESC])->asArray()->with('category')->all();
 
-        return $this->render('index', compact('articles', 'pages', 'articlesForMainPage'));
+        $subscriber = new Subscribers();
+        if ($subscriber->load(Yii::$app->request->post()) && $subscriber->addSubscriber() && Mailer::send(Mailer::TYPE_SUBSCRIPTION, $subscriber)) {
+            Yii::$app->session->setFlash('success', 'Проверьте почту!');
+        }
+
+        return $this->render('index', compact('articles', 'pages', 'articlesForMainPage','subscriber'));
     }
+
+
+    public function actionActivate($subscriberId, $subscriberToken){
+        $subscriberToActivate = Subscribers::find()->where(['id'=>$subscriberId, 'token'=>$subscriberToken])->one();
+        if(empty($subscriberToActivate)){
+            throw new NotFoundHttpException('Бундай обуна йўқ');
+        }
+        if(!$subscriberToActivate){
+            Yii::$app->session->setFlash('error', 'email тасдиқланмади!');
+        }else{
+            Yii::$app->session->setFlash('success', 'email муваффақиятли тасдиқланди!');
+        }
+        return $this->goHome();
+    }
+
 
 
     public function actionArticle($id){
@@ -83,6 +106,7 @@ class SiteController extends Controller{
 
         return $this->render('article', compact('article'));
     }
+
 
     public function actionCategory($id){
         $id = (int)$id;
@@ -99,7 +123,32 @@ class SiteController extends Controller{
     }
 
 
-    public function actionLogin(){
+    public function actionQuestion(){
+        $model = new Questions();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->sendQuestion();
+            Yii::$app->session->setFlash('success', 'Саволингиз муваффақиятли юборилди!');
+            return $this->redirect(['/questions']);
+        }
+
+        return $this->render('questions', [
+            'model' => $model,
+        ]);
+    }
+
+
+
+    public function actionSources(){
+        return $this->render('sources');
+    }
+
+
+    public function actionBooks(){
+        return $this->render('books');
+    }
+
+
+    /*public function actionLogin(){
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -113,13 +162,13 @@ class SiteController extends Controller{
         return $this->render('login', [
             'model' => $model,
         ]);
-    }
+    }*/
 
 
-    public function actionLogout(){
+    /*public function actionLogout(){
         Yii::$app->user->logout();
         return $this->goHome();
-    }
+    }*/
 
 
     /*public function actionContact(){
@@ -133,32 +182,6 @@ class SiteController extends Controller{
             'model' => $model,
         ]);
     }*/
-
-    public function actionSources(){
-        return $this->render('sources');
-    }
-
-
-    public function actionQuestion(){
-        $model = new Questions();
-        /*if(Yii::$app->request->isPost){
-            var_dump(Yii::$app->request->post());die;
-        }*/
-        if ($model->load(Yii::$app->request->post())) {
-            $model->sendQuestion();
-            Yii::$app->session->setFlash('success', 'Саволингиз муваффақиятли юборилди!');
-            return $this->redirect(['/questions']);
-        }
-
-        return $this->render('questions', [
-            'model' => $model,
-        ]);
-    }
-
-    public function actionBooks(){
-        return $this->render('books');
-    }
-
 
 
 

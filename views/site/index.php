@@ -1,5 +1,6 @@
 <?
 
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 ?>
@@ -90,14 +91,30 @@ use yii\widgets\LinkPager;
                         <div class="sidebar-widget-title">
                             <h3>Аъзо бўлиш</h3>
                         </div>
-                        <div class="input-group input-group-lg">
+                        <? if(Yii::$app->session->hasFlash('success')):?>
+                            <div class="alert alert-success alert-dismissable" style="padding-top:10px;padding-bottom: 10px;">
+                                <?php echo Yii::$app->session->getFlash('success'); ?>
+                            </div>
+                        <? endif;?>
+
+                        <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+
+                        <?= $form->field($subscriber, 'email')->textInput(['autofocus' => true, 'class'=>'form-control subInput']) ?>
+
+                        <div class="form-group">
+                            <?= Html::submitButton('OK', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                        </div>
+
+                        <?php ActiveForm::end(); ?>
+
+                        <!--<div class="input-group input-group-lg">
                             <input type="text" class="form-control subInput" placeholder="Email...">
                             <span class="input-group-btn">
                                     <button class="btn btn-default" type="button" >
                                          OK
                                     </button>
                                 </span>
-                        </div>
+                        </div>-->
 
                     </div>
                     <div class="widget sidebar-widget tags">

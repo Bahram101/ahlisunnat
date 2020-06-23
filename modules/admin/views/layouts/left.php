@@ -34,6 +34,7 @@
                     ['label' => 'Статьи', 'icon' => 'file-code-o', 'url' => ['article/index']],
                     ['label' => 'Категории', 'icon' => 'dashboard', 'url' => ['category/index']],
                     ['label' => 'Вопросы', 'icon' => 'dashboard', 'url' => ['questions/index']],
+                    ['label' => 'Подписчики', 'icon' => 'dashboard', 'url' => ['subscribers/index']],
 //                    ['label' => 'Вопросы', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'Some tools',

@@ -1,15 +1,15 @@
 <?php
 
-namespace app\models;
+namespace app\modules\admin\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\Article;
+use app\modules\admin\models\Subscribers;
 
 /**
- * ArticleSearch represents the model behind the search form of `app\modules\admin\models\Article`.
+ * SubscribersSearch represents the model behind the search form of `app\modules\admin\models\Subscribers`.
  */
-class ArticleSearch extends Article
+class SubscribersSearch extends Subscribers
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class ArticleSearch extends Article
     public function rules()
     {
         return [
-            [['id', 'catalog_id', 'hits', 'on_main_page'], 'integer'],
-            [['title', 'introtext', 'text', 'created', 'modified'], 'safe'],
+            [['id'], 'integer'],
+            [['email', 'token', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class ArticleSearch extends Article
      */
     public function search($params)
     {
-        $query = Article::find();
+        $query = Subscribers::find()->orderBy('id desc');
 
         // add conditions that should always apply here
 
@@ -59,16 +59,12 @@ class ArticleSearch extends Article
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'catalog_id' => $this->catalog_id,
-            'created' => $this->created,
-            'modified' => $this->modified,
-            'hits' => $this->hits,
-            'on_main_page' => $this->on_main_page,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'introtext', $this->introtext])
-            ->andFilterWhere(['like', 'text', $this->text]);
+        $query->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['like', 'token', $this->token]);
 
         return $dataProvider;
     }

@@ -31,7 +31,8 @@ class AppAsset extends AssetBundle
             "js/init.js",
             "plugins/flexslider/js/jquery.flexslider.js",
             "plugins/countdown/js/jquery.countdown.min.js",
-            'js/real-accessability.js?ver=1.0'
+            'js/real-accessability.js?ver=1.0',
+            'js/main.js'
     ];
     public $depends = [
        /* 'yii\web\YiiAsset',

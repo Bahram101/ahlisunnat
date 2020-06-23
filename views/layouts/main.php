@@ -1,4 +1,5 @@
 <?
+
 $json = file_get_contents(
     'https://namaztimes.kz/api/praytimes?id=20720&type=json'
 );
@@ -526,7 +527,7 @@ $this->beginPage()
         <!--</div>-->
     </div>
     <!-- End Hero Slider -->
-
+    <?//= Alert::widget() ?>
     <!-- Start Content -->
     <?=$content;?>
     <!-- Start Featured Gallery -->

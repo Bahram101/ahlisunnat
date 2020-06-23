@@ -1,6 +1,5 @@
-jQuery(function($){
 
-	$()
+jQuery(function($){
 
 var NATIVE = window.NATIVE || {};
 
