@@ -86,14 +86,13 @@ class SiteController extends Controller{
 
 
     public function actionActivate($subscriberId, $subscriberToken){
-        $subscriberToActivate = Subscribers::find()->where(['id'=>$subscriberId, 'token'=>$subscriberToken])->one();
-        if(empty($subscriberToActivate)){
-            throw new NotFoundHttpException('Бундай обуна йўқ');
-        }
-        if(!$subscriberToActivate){
-            Yii::$app->session->setFlash('error', 'email тасдиқланмади!');
-        }else{
+        $subscriber = Subscribers::find()->where(['id'=>$subscriberId, 'token'=>$subscriberToken])->one();
+
+        if($subscriber){
+            $subscriber->activate();
             Yii::$app->session->setFlash('success', 'email муваффақиятли тасдиқланди!');
+        }else{
+            Yii::$app->session->setFlash('error', 'email тасдиқланмади!');
         }
         return $this->goHome();
     }

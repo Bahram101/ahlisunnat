@@ -15,6 +15,8 @@ use Yii;
  */
 class Subscribers extends \yii\db\ActiveRecord{
 
+    const STATUS_ACTIVE = 1;
+
     public static function tableName(){
         return 'subscribers';
     }
@@ -41,8 +43,11 @@ class Subscribers extends \yii\db\ActiveRecord{
         ];
     }
 
-    public function generateToken(){
-        $this->token = md5(mt_rand());
+
+    public function activate(){
+        $this->status = self::STATUS_ACTIVE;
+        $this->token = null;
+        return $this->save();
     }
 
     public function addSubscriber(){
