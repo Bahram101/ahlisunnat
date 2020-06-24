@@ -425,7 +425,7 @@ $this->beginPage()
                     <ul class="sf-menu">
                         <li><a href="/" class="whiteFont">Бош саҳифа</a> </li>
                         <li><a href="/quran" class="whiteFont">Қуръони карим</a></li>
-                        <li class="megamenu"><a href="" class="whiteFont">Мундарижа</a>
+                        <li class="megamenu mundarija"><a href="" class="whiteFont">Мундарижа</a>
                             <ul class="dropdown">
                                 <li>
                                     <div class="megamenu-container container">

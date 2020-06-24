@@ -50,8 +50,8 @@ $config = [
                 'host' => 'smtp.mail.ru',
                 'username' => 'bahram101@mail.ru',
                 'password' => 'gnusmasgnusmas2',
-                'port' => '587',
-                'encryption' => 'tls',
+                'port' => '587', //if ssl 465
+                'encryption' => 'tls', //ssl
             ],
         ],
         'log' => [

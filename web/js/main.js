@@ -1,5 +1,5 @@
-$(document).ready(function(){
-    $('.megamenu').on('click', function(e){
+/*$(document).ready(function(){
+    $('.mundarija').on('click', function(e){
         e.preventDefault();
     });
-});
+});*/

@@ -67,32 +67,31 @@ class SiteController extends Controller{
 
     public function actionIndex(){
         $articlesForMainPage = Article::articlesForMainPage();
-        $query = Article::find();
-        $pages = new Pagination([
-            'totalCount' => $query->count(),
-            'pageSize' => 3,
-            'forcePageParam' => false,
-            'pageSizeParam' => false
-        ]);
-        $articles = $query->offset($pages->offset)->limit($pages->limit)->orderBy(['id' => SORT_DESC])->asArray()->with('category')->all();
+        $latestArticles = Article::getLatestArticles(3);
 
         $subscriber = new Subscribers();
         if ($subscriber->load(Yii::$app->request->post()) && $subscriber->addSubscriber() && Mailer::send(Mailer::TYPE_SUBSCRIPTION, $subscriber)) {
             Yii::$app->session->setFlash('success', 'Проверьте почту!');
         }
 
-        return $this->render('index', compact('articles', 'pages', 'articlesForMainPage','subscriber'));
+        return $this->render('index', [
+            'articles'=>$latestArticles['articles'],
+            'pages'=>$latestArticles['pages'],
+            'articlesForMainPage'=>$articlesForMainPage,
+            'subscriber'=>$subscriber
+        ]);
     }
 
 
     public function actionActivate($subscriberId, $subscriberToken){
         $subscriber = Subscribers::find()->where(['id'=>$subscriberId, 'token'=>$subscriberToken])->one();
+        if(empty($subscriber)){
+            throw new NotFoundHttpException('Not found');
+        }
 
-        if($subscriber){
+        if($subscriber == true && $subscriber->status == 0){
             $subscriber->activate();
-            Yii::$app->session->setFlash('success', 'email муваффақиятли тасдиқланди!');
-        }else{
-            Yii::$app->session->setFlash('error', 'email тасдиқланмади!');
+            Yii::$app->session->setFlash('success', 'Электрон манзилингиз муваффақиятли тасдиқланди!');
         }
         return $this->goHome();
     }
@@ -100,25 +99,18 @@ class SiteController extends Controller{
 
 
     public function actionArticle($id){
-        $id = (int)$id;
-        $article = Article::find()->where(['id'=>$id])->asArray()->one();
-
+        $article = Article::getArticle($id);
         return $this->render('article', compact('article'));
     }
 
 
     public function actionCategory($id){
-        $id = (int)$id;
-        $query = Article::find()->where(['catalog_id'=>$id]);
-        $pages = new Pagination([
-            'totalCount' => $query->count(),
-            'pageSize' => 10,
-            'forcePageParam' => false,
-            'pageSizeParam' => false
-        ]);
-        $articles = $query->offset($pages->offset)->limit($pages->limit)->orderBy(['id' => SORT_DESC])->asArray()->with('category')->all();
+        $articles = Article::getArticlesByCategory($id);
 
-        return $this->render('category', compact('articles', 'pages'));
+        return $this->render('category', [
+            'articles'=>$articles['articles'],
+            'pages'=>$articles['pages']
+        ]);
     }
 
 
@@ -129,7 +121,6 @@ class SiteController extends Controller{
             Yii::$app->session->setFlash('success', 'Саволингиз муваффақиятли юборилди!');
             return $this->redirect(['/questions']);
         }
-
         return $this->render('questions', [
             'model' => $model,
         ]);

@@ -59,6 +59,15 @@ if (Yii::$app->controller->action->id === 'login') {
     </div>
 
     <?php $this->endBody() ?>
+    <? $this->registerJsFile('/ckeditor/ckeditor.js')?>
+    <? $this->registerJsFile('/ckfinder/ckfinder.js')?>
+    <script>
+        $(document).ready(function(){
+            var editor = CKEDITOR.replaceAll();
+            CKFinder.setupCKEditor( editor );
+        })
+
+    </script>
     </body>
     </html>
     <?php $this->endPage() ?>
