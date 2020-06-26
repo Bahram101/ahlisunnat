@@ -23,16 +23,19 @@ class Newsletters extends \yii\db\ActiveRecord
         return 'newsletters';
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function getCategory(){
+        return $this->hasOne(Category::class, ['id'=>'category_id']);
+    }
+
+
     public function rules()
     {
         return [
-            [['title', 'subtitile', 'content'], 'required'],
+            [['title', 'content'], 'required'],
             [['content'], 'string'],
             [['created_at'], 'safe'],
-            [['title', 'subtitile'], 'string', 'max' => 255],
+            [['category_id', 'status'], 'integer'],
+            [['title'], 'string', 'max' => 255],
         ];
     }
 
@@ -43,10 +46,10 @@ class Newsletters extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'subtitile' => 'Subtitile',
-            'content' => 'Content',
-            'created_at' => 'Created At',
+            'title' => 'Название',
+            'category_id' => 'Категория',
+            'status' => 'Статус',
+            'created_at' => 'Дата',
         ];
     }
 }

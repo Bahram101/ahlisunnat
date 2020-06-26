@@ -4,12 +4,12 @@ namespace app\modules\admin\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\Newsletters;
+use app\modules\admin\models\Sendnewsletter;
 
 /**
- * NewslettersSearch represents the model behind the search form of `app\modules\admin\models\Newsletters`.
+ * SendnewsletterSearch represents the model behind the search form of `app\modules\admin\models\Sendnewsletter`.
  */
-class NewslettersSearch extends Newsletters
+class SendnewsletterSearch extends Sendnewsletter
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class NewslettersSearch extends Newsletters
     public function rules()
     {
         return [
-            [['id','category_id'], 'integer'],
-            [['title',  'content', 'created_at'], 'safe'],
+            [['id', 'newsletter_id', 'category_id', 'status'], 'integer'],
+            [['date'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class NewslettersSearch extends Newsletters
      */
     public function search($params)
     {
-        $query = Newsletters::find();
+        $query = Sendnewsletter::find();
 
         // add conditions that should always apply here
 
@@ -59,12 +59,10 @@ class NewslettersSearch extends Newsletters
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'created_at' => $this->created_at,
+            'newsletter_id' => $this->newsletter_id,
+            'date' => $this->date,
+            'status' => $this->status,
         ]);
-
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'category_id', $this->category_id])
-            ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

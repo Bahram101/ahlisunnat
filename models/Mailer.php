@@ -7,18 +7,26 @@ use Yii;
 class Mailer {
 
     const TYPE_SUBSCRIPTION = 1;
-    /*const TYPE_PASSWORD_RESET = 2;
-    const TYPE_SENDING_QUESTION = 3;
-    const TYPE_SENDING_ANSWER = 4;*/
+    const TYPE_NEWSLETTER_ALLAH = 2;
+    const TYPE_NEWSLETTER_ISLAM = 3;
+    const TYPE_PASSWORD_RESET = 4;
+    const TYPE_SENDING_QUESTION = 5;
+    const TYPE_SENDING_ANSWER = 6;
 
-    private static $renderFile;
-    private static $renderParams = [];
     private static $from = ['bahram101@mail.ru'=>'Ahlisunnat'];
     private static $to;
     private static $subject;
+    private static $renderFile;
+    private static $renderParams = [];
 
     public static function validate($type, $model){
         switch ($type){
+            case self::TYPE_NEWSLETTER_ALLAH:
+                self::$to = [$model];
+                self::$subject = 'Савол';
+                self::$renderFile = 'newsletter_allah';
+                break;
+
             case self::TYPE_SUBSCRIPTION:
                 if(empty($model->id) || empty($model->email) || empty($model->token)){
                     return false;
@@ -58,8 +66,30 @@ class Mailer {
         }
 
         $message = \Yii::$app->mailer->compose(self::$renderFile, self::$renderParams);
-        return $message->setFrom(self::$from)->setTo(self::$to)->setSubject(self::$subject)->send();
+        return $message->setFrom(self::$from)
+                        ->setTo(self::$to)
+                        ->setSubject(self::$subject)
+                        ->send();
+    }
+
+
+
+    public static function multipleSend($type, $model){
+        if(!self::validate($type, $model)){
+            return false;
+        }
+
+        foreach(self::$to as $email){
+            $message = \Yii::$app->mailer->compose(self::$renderFile, self::$renderParams);
+            return $message->setFrom(self::$from)
+                ->setTo($email)
+                ->setSubject(self::$subject)
+                ->send();
+        }
 
     }
+
+
+
 
 }

@@ -2,17 +2,21 @@
 
 namespace app\modules\admin\controllers;
 
-use Yii;
+use app\models\Mailer;
 use app\modules\admin\models\Newsletters;
-use app\modules\admin\models\NewslettersSearch;
+use app\modules\admin\models\Subscribers;
+use Yii;
+use app\modules\admin\models\Sendnewsletter;
+use app\modules\admin\models\SendnewsletterSearch;
+use yii\db\Query;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * NewslettersController implements the CRUD actions for Newsletters model.
+ * SendnewsletterController implements the CRUD actions for Sendnewsletter model.
  */
-class NewslettersController extends Controller
+class SendnewsletterController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +34,12 @@ class NewslettersController extends Controller
     }
 
     /**
-     * Lists all Newsletters models.
+     * Lists all Sendnewsletter models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new NewslettersSearch();
+        $searchModel = new SendnewsletterSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -44,12 +48,7 @@ class NewslettersController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Newsletters model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
     public function actionView($id)
     {
         return $this->render('view', [
@@ -58,16 +57,28 @@ class NewslettersController extends Controller
     }
 
     /**
-     * Creates a new Newsletters model.
+     * Creates a new Sendnewsletter model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new Newsletters();
+    public function actionCreate(){
+        $model = new Sendnewsletter();
+
+        if(Yii::$app->request->isPost){
+            $subscribers = (new Query())->select(['email'])->from('subscribers')->all();
+            $emails = [];
+            foreach($subscribers as $subscriber){
+                $emails[] = $subscriber['email'];
+            }
+
+            $post = Yii::$app->request->post();
+            $newsletterId = $post['Sendnewsletter']['newsletter_id'];
+
+            Mailer::multipleSend(Mailer::TYPE_NEWSLETTER_ALLAH, $emails);
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -75,19 +86,16 @@ class NewslettersController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Newsletters model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
+
+
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -96,7 +104,7 @@ class NewslettersController extends Controller
     }
 
     /**
-     * Deletes an existing Newsletters model.
+     * Deletes an existing Sendnewsletter model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +118,15 @@ class NewslettersController extends Controller
     }
 
     /**
-     * Finds the Newsletters model based on its primary key value.
+     * Finds the Sendnewsletter model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Newsletters the loaded model
+     * @return Sendnewsletter the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Newsletters::findOne($id)) !== null) {
+        if (($model = Sendnewsletter::findOne($id)) !== null) {
             return $model;
         }
 
