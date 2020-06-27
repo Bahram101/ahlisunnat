@@ -7,11 +7,11 @@ use Yii;
 class Mailer {
 
     const TYPE_SUBSCRIPTION = 1;
-    const TYPE_NEWSLETTER_ALLAH = 2;
-    const TYPE_NEWSLETTER_ISLAM = 3;
     const TYPE_PASSWORD_RESET = 4;
     const TYPE_SENDING_QUESTION = 5;
     const TYPE_SENDING_ANSWER = 6;
+    const TYPE_NEWSLETTER_ALLAH = 34;
+    const TYPE_NEWSLETTER_ISLAM = 35;
 
     private static $from = ['bahram101@mail.ru'=>'Ahlisunnat'];
     private static $to;
@@ -19,12 +19,20 @@ class Mailer {
     private static $renderFile;
     private static $renderParams = [];
 
-    public static function validate($type, $model){
+    public static function validate($type, $model, $newsletter = false){
         switch ($type){
             case self::TYPE_NEWSLETTER_ALLAH:
                 self::$to = [$model];
                 self::$subject = 'Савол';
                 self::$renderFile = 'newsletter_allah';
+                self::$renderParams = ['newsletter' => $newsletter];
+                break;
+
+            case self::TYPE_NEWSLETTER_ISLAM:
+                self::$to = [$model];
+                self::$subject = 'Савол';
+                self::$renderFile = 'newsletter_islam';
+                self::$renderParams =['newsletter' => $newsletter];
                 break;
 
             case self::TYPE_SUBSCRIPTION:
@@ -64,7 +72,6 @@ class Mailer {
         if(!self::validate($type, $model)){
             return false;
         }
-
         $message = \Yii::$app->mailer->compose(self::$renderFile, self::$renderParams);
         return $message->setFrom(self::$from)
                         ->setTo(self::$to)
@@ -73,12 +80,10 @@ class Mailer {
     }
 
 
-
-    public static function multipleSend($type, $model){
-        if(!self::validate($type, $model)){
+    public static function multipleSend($template, $emails, $newsletter){
+        if(!self::validate($template, $emails, $newsletter)){
             return false;
         }
-
         foreach(self::$to as $email){
             $message = \Yii::$app->mailer->compose(self::$renderFile, self::$renderParams);
             return $message->setFrom(self::$from)
@@ -86,7 +91,6 @@ class Mailer {
                 ->setSubject(self::$subject)
                 ->send();
         }
-
     }
 
 

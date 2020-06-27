@@ -3,8 +3,9 @@
 namespace app\modules\admin\controllers;
 
 use app\models\Mailer;
+use app\models\Subscribers;
 use app\modules\admin\models\Newsletters;
-use app\modules\admin\models\Subscribers;
+//use app\modules\admin\models\Subscribers;
 use Yii;
 use app\modules\admin\models\Sendnewsletter;
 use app\modules\admin\models\SendnewsletterSearch;
@@ -56,29 +57,31 @@ class SendnewsletterController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Sendnewsletter model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
+
     public function actionCreate(){
         $model = new Sendnewsletter();
 
         if(Yii::$app->request->isPost){
-            $subscribers = (new Query())->select(['email'])->from('subscribers')->all();
-            $emails = [];
-            foreach($subscribers as $subscriber){
-                $emails[] = $subscriber['email'];
-            }
 
             $post = Yii::$app->request->post();
+            $post = (object) $post['Sendnewsletter'];
+            $newsletterId = $post->newsletter_id;
+            var_dump($newsletterId);
+            die;
+
+
             $newsletterId = $post['Sendnewsletter']['newsletter_id'];
+            $categoryId = $post['Sendnewsletter']['category_id'];
 
-            Mailer::multipleSend(Mailer::TYPE_NEWSLETTER_ALLAH, $emails);
-        }
+            $emails = Subscribers::getSubscribers();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'id' => $model->id]);
+            $newsletter = Newsletters::changeStatusOnNewsletter($newsletterId);
+            Sendnewsletter::changeStatusOnSentNewsletter($newsletterId, $categoryId);
+
+            if(Mailer::multipleSend($categoryId, $emails, $newsletter)){
+                Yii::$app->session->setFlash('success', 'Рассылка успешно отправлено!');
+                return $this->redirect(['index']);
+            }
         }
 
         return $this->render('create', [
@@ -90,8 +93,7 @@ class SendnewsletterController extends Controller
 
 
 
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id){
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

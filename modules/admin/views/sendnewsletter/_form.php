@@ -17,11 +17,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'newsletter_id')->dropDownList(ArrayHelper::map(Newsletters::find()->where(['status'=>0])->all(), 'id', 'title')) ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(Category::find()->where(['id' => [34, 35,]])->all(), 'id', 'title')) ?>
+    <?/*= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(Category::find()->where(['id' => [34, 35,]])->all(), 'id', 'title')) */?>
+
+    <?//= $form->field($model, 'category_id')->checkbox(['1'=>'Да', '0'=> 'Нет']) ?>
+
+    <?= $form->field($model, 'category_id')
+        ->radioList(ArrayHelper::map(Category::find()->where(['id' => [34, 35,]])->all(), 'id', 'title')) ?>
 
     <?= $form->field($model, 'date')->textInput() ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+<!--    --><?//= $form->field($model, 'status')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Send', ['class' => 'btn btn-success']) ?>

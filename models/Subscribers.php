@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "subscribers".
@@ -60,5 +61,14 @@ class Subscribers extends \yii\db\ActiveRecord{
             return true;
         }
         return false;
+    }
+
+    public static function getSubscribers(){
+        $subscribers = (new Query())->select(['email'])->from('subscribers')->all();
+        $emails = [];
+        foreach($subscribers as $subscriber){
+            $emails[] = $subscriber['email'];
+        }
+        return $emails;
     }
 }

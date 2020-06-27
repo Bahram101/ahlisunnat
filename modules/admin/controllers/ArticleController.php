@@ -12,13 +12,11 @@ use yii\filters\VerbFilter;
 /**
  * ArticleController implements the CRUD actions for Article model.
  */
-class ArticleController extends Controller
-{
+class ArticleController extends Controller{
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
+    public function behaviors(){
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -33,8 +31,7 @@ class ArticleController extends Controller
      * Lists all Article models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex(){
         $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -50,8 +47,7 @@ class ArticleController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
+    public function actionView($id){
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -62,12 +58,11 @@ class ArticleController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate(){
         $model = new Article();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('create', [
@@ -82,8 +77,7 @@ class ArticleController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id){
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -102,8 +96,7 @@ class ArticleController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id){
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -116,8 +109,7 @@ class ArticleController extends Controller
      * @return Article the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id){
         if (($model = Article::findOne($id)) !== null) {
             return $model;
         }

@@ -28,8 +28,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'category_id',
-            'status',
+//            'category_id',
+            [
+                'format'=>'text',
+                'attribute'=> 'category_id',
+                'value'=> function($data){
+                    return $data->category->title;
+                },
+            ],
+//            'status',
+            [
+                'attribute'=> 'status',
+                'value'=> function ($data)
+                {
+                    return $data->status ? '<span class="text-success">Отправлено</span>' : '<span class="text-danger">Не отправлено</span>';
+                },
+                'format'=>'html'
+            ],
             'created_at',
 //            'content:ntext',
 

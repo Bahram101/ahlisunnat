@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-//            'newsletter_id',
             [
                 'format'=>'text',
                 'attribute'=> 'newsletter_id',
@@ -35,7 +34,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->newsletter->title;
                 },
             ],
-//            'category_id',
             [
                 'format'=>'text',
                 'attribute'=> 'category_id',
@@ -44,7 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'date',
-            'status',
+            [
+                'attribute'=> 'status',
+                'value'=> function ($data)
+                {
+                    return $data->status ? '<span class="text-success">Отправлено</span>' : '<span class="text-danger">Не отправлено</span>';
+                },
+                'format'=>'html'
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

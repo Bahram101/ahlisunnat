@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+<!--    --><?//= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Send', ['class' => 'btn btn-success']) ?>

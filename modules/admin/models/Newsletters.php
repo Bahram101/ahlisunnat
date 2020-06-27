@@ -52,4 +52,14 @@ class Newsletters extends \yii\db\ActiveRecord
             'created_at' => 'Дата',
         ];
     }
+
+
+    public static function changeStatusOnNewsletter($newsletterId){
+        $newsletter = self::findOne($newsletterId);
+        $newsletter->status = 1;
+        $newsletter->save();
+        return $newsletter;
+    }
+
+
 }

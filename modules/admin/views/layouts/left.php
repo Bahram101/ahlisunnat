@@ -35,17 +35,17 @@
                     ['label' => 'Категории', 'icon' => 'dashboard', 'url' => ['category/index']],
                     ['label' => 'Вопросы', 'icon' => 'dashboard', 'url' => ['questions/index']],
                     ['label' => 'Подписчики', 'icon' => 'dashboard', 'url' => ['subscribers/index']],
-                    ['label' => 'Рассылки', 'icon' => 'dashboard', 'url' => ['newsletters/index']],
-                    ['label' => 'Отправить рассылки', 'icon' => 'dashboard', 'url' => ['sendnewsletter/index']],
+//                    ['label' => 'Рассылки', 'icon' => 'dashboard', 'url' => ['newsletters/index']],
+//                    ['label' => 'Отправить рассылки', 'icon' => 'dashboard', 'url' => ['sendnewsletter/index']],
 //                    ['label' => 'Вопросы', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
-                        'label' => 'Some tools',
+                        'label' => 'Рассылки',
                         'icon' => 'share',
                         'url' => '#',
                         'items' => [
-                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
-                            [
+                            ['label' => 'Создать рассылку', 'icon' => 'file-code-o', 'url' => ['newsletters/index'],],
+                            ['label' => 'Отправить рассылку', 'icon' => 'dashboard', 'url' => ['sendnewsletter/index'],],
+                            /*[
                                 'label' => 'Level One',
                                 'icon' => 'circle-o',
                                 'url' => '#',
@@ -61,7 +61,7 @@
                                         ],
                                     ],
                                 ],
-                            ],
+                            ],*/
                         ],
                     ],
                 ],

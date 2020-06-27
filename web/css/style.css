@@ -2485,7 +2485,7 @@ ol.breadcrumb > .active{
 .alert .close {
     position: relative;
     top: 0px;
-    right: -22px;
+    /*right: -22px;*/
     color: #FFFFFF;
     text-shadow: none;
     line-height: 20px;

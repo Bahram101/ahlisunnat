@@ -46,9 +46,17 @@ class Sendnewsletter extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'newsletter_id' => 'Название рассылки',
-            'category_id' => 'Категория',
+            'category_id' => 'Шаблон',
             'date' => 'Дата',
             'status' => 'Статус',
         ];
+    }
+
+    public static function changeStatusOnSentNewsletter($newsletterId, $categoryId){
+        $sendNewsletter = new Sendnewsletter();
+        $sendNewsletter->newsletter_id = $newsletterId;
+        $sendNewsletter->category_id = $categoryId;
+        $sendNewsletter->status = 1;
+        $sendNewsletter->save();
     }
 }
