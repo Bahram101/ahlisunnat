@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\base\BaseObject;
+use yii\queue\JobInterface;
 
 class Mailer {
 
@@ -84,14 +86,26 @@ class Mailer {
         if(!self::validate($template, $emails, $newsletter)){
             return false;
         }
-        foreach(self::$to as $email){
+        for ($i=0; $i < count($emails); $i++){
+            $message = \Yii::$app->mailer->compose(self::$renderFile, self::$renderParams);
+            $message->setFrom(self::$from)->setTo($emails[$i])->setSubject(self::$subject)->send();
+            if( $i%1 == 0 ){
+                sleep(30);
+            }
+        }
+
+
+        /*foreach(self::$to as $email){
             $message = \Yii::$app->mailer->compose(self::$renderFile, self::$renderParams);
             return $message->setFrom(self::$from)
                 ->setTo($email)
                 ->setSubject(self::$subject)
                 ->send();
-        }
+        }*/
     }
+
+
+
 
 
 

@@ -1,5 +1,7 @@
 <?
 
+use app\widgets\HitArticles;
+use app\widgets\Subscribe;
 use yii\helpers\Html;
 
 ?>
@@ -47,31 +49,11 @@ use yii\helpers\Html;
                                 </span>
                         </div>
                     </div>
-                    <div class="widget sidebar-widget">
-                        <div class="sidebar-widget-title">
-                            <h3>Бу ойда кўп ўқилганлар</h3>
-                        </div>
-                        <ul>
-                            <li><a href="#">Faith</a> (10)</li>
-                            <li><a href="#">Missions</a> (12)</li>
-                            <li><a href="#">Salvation</a> (34)</li>
-                            <li><a href="#">Worship</a> (14)</li>
-                        </ul>
-                    </div>
-                    <div class="widget sidebar-widget subscribe">
-                        <div class="sidebar-widget-title">
-                            <h3>Аъзо бўлиш</h3>
-                        </div>
-                        <div class="input-group input-group-lg">
-                            <input type="text" class="form-control subInput" placeholder="Email...">
-                            <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                         OK
-                                    </button>
-                                </span>
-                        </div>
 
-                    </div>
+                    <?=HitArticles::widget()?>
+
+                    <?=Subscribe::widget()?>
+
                     <div class="widget sidebar-widget tags">
                         <div class="sidebar-widget-title">
                             <h3>Теглар</h3>

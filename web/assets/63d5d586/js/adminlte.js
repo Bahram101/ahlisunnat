@@ -317,10 +317,10 @@ throw new Error('AdminLTE requires jQuery')
 
 /* ControlSidebar()
  * ===============
- * Toggles the state of the control sidebar
+ * Toggles the state of the control views
  *
- * @Usage: $('#control-sidebar-trigger').controlSidebar(options)
- *         or add [data-toggle="control-sidebar"] to the trigger
+ * @Usage: $('#control-views-trigger').controlSidebar(options)
+ *         or add [data-toggle="control-views"] to the trigger
  *         Pass any option as data-option="value"
  */
 +function ($) {
@@ -333,18 +333,18 @@ throw new Error('AdminLTE requires jQuery')
   };
 
   var Selector = {
-    sidebar: '.control-sidebar',
-    data   : '[data-toggle="control-sidebar"]',
-    open   : '.control-sidebar-open',
-    bg     : '.control-sidebar-bg',
+    sidebar: '.control-views',
+    data   : '[data-toggle="control-views"]',
+    open   : '.control-views-open',
+    bg     : '.control-views-bg',
     wrapper: '.wrapper',
     content: '.content-wrapper',
     boxed  : '.layout-boxed'
   };
 
   var ClassName = {
-    open: 'control-sidebar-open',
-    transition: 'control-sidebar-hold-transition',
+    open: 'control-views-open',
+    transition: 'control-views-hold-transition',
     fixed: 'fixed'
   };
 
@@ -471,7 +471,7 @@ throw new Error('AdminLTE requires jQuery')
 
 /* DirectChat()
  * ===============
- * Toggles the state of the control sidebar
+ * Toggles the state of the control views
  *
  * @Usage: $('#my-chat-box').directChat()
  *         or add [data-widget="direct-chat"] to the trigger
@@ -539,7 +539,7 @@ throw new Error('AdminLTE requires jQuery')
 
 /* PushMenu()
  * ==========
- * Adds the push menu functionality to the sidebar.
+ * Adds the push menu functionality to the views.
  *
  * @usage: $('.btn').pushMenu(options)
  *          or add [data-toggle="push-menu"] to any button
@@ -557,23 +557,23 @@ throw new Error('AdminLTE requires jQuery')
   };
 
   var Selector = {
-    collapsed     : '.sidebar-collapse',
-    open          : '.sidebar-open',
-    mainSidebar   : '.main-sidebar',
+    collapsed     : '.views-collapse',
+    open          : '.views-open',
+    mainSidebar   : '.main-views',
     contentWrapper: '.content-wrapper',
-    searchInput   : '.sidebar-form .form-control',
+    searchInput   : '.views-form .form-control',
     button        : '[data-toggle="push-menu"]',
-    mini          : '.sidebar-mini',
-    expanded      : '.sidebar-expanded-on-hover',
+    mini          : '.views-mini',
+    expanded      : '.views-expanded-on-hover',
     layoutFixed   : '.fixed'
   };
 
   var ClassName = {
-    collapsed    : 'sidebar-collapse',
-    open         : 'sidebar-open',
-    mini         : 'sidebar-mini',
-    expanded     : 'sidebar-expanded-on-hover',
-    expandFeature: 'sidebar-mini-expand-feature',
+    collapsed    : 'views-collapse',
+    open         : 'views-open',
+    mini         : 'views-mini',
+    expanded     : 'views-expanded-on-hover',
+    expandFeature: 'views-mini-expand-feature',
     layoutFixed  : 'fixed'
   };
 
@@ -1001,12 +1001,12 @@ throw new Error('AdminLTE requires jQuery')
     layoutBoxed   : '.layout-boxed',
     mainFooter    : '.main-footer',
     mainHeader    : '.main-header',
-    mainSidebar   : '.main-sidebar',
+    mainSidebar   : '.main-views',
     slimScrollDiv : 'slimScrollDiv',
     sidebar       : '.sidebar',
-    controlSidebar: '.control-sidebar',
+    controlSidebar: '.control-views',
     fixed         : '.fixed',
-    sidebarMenu   : '.sidebar-menu',
+    sidebarMenu   : '.views-menu',
     logo          : '.main-header .logo'
   };
 
@@ -1070,7 +1070,7 @@ throw new Error('AdminLTE requires jQuery')
     var windowHeight  = $(window).height();
     var sidebarHeight = $(Selector.sidebar).outerHeight() || 0;
 
-    // Set the min-height of the content and sidebar based on
+    // Set the min-height of the content and views based on
     // the height of the document.
     if ($('body').hasClass(ClassName.fixed)) {
       $(Selector.contentWrapper).css('min-height', windowHeight - footerHeight);
@@ -1085,7 +1085,7 @@ throw new Error('AdminLTE requires jQuery')
         postSetHeight = sidebarHeight;
       }
 
-      // Fix for the control sidebar height
+      // Fix for the control views height
       var $controlSidebar = $(Selector.controlSidebar);
       if (typeof $controlSidebar !== 'undefined') {
         if ($controlSidebar.height() > postSetHeight)
@@ -1107,7 +1107,7 @@ throw new Error('AdminLTE requires jQuery')
     if (this.options.slimscroll) {
       if (typeof $.fn.slimScroll !== 'undefined') {
         // Destroy if it exists
-        // $(Selector.sidebar).slimScroll({ destroy: true }).height('auto')
+        // $(Selector.views).slimScroll({ destroy: true }).height('auto')
 
         // Add slimscroll
         if ($(Selector.mainSidebar).find(Selector.slimScrollDiv).length === 0) {

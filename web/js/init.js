@@ -468,7 +468,7 @@ $('ul.carets li').prepend('<i class="fa fa-caret-right"></i> ');
 $('a.external').prepend('<i class="fa fa-external-link"></i> ');
 
 // Featured Event Widget
-$(".featured_event_widget").find(".sidebar-widget-title h3").prepend("<span class='featured-star'><i class='fa fa-star'></i></span>");
+$(".featured_event_widget").find(".views-widget-title h3").prepend("<span class='featured-star'><i class='fa fa-star'></i></span>");
 $(".featured_event_widget").find("h4.featured-event-title a").append(" <i class='fa fa-caret-right'></i>");
 $(".featured_event_widget").has("img.featured-event-image").find(".featured-event-time").css("position","absolute");
 

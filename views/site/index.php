@@ -1,5 +1,7 @@
 <?
 
+use app\widgets\HitArticles;
+use app\widgets\Subscribe;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
@@ -87,42 +89,30 @@ use yii\widgets\LinkPager;
                                 </span>
                         </div>
                     </div>
-                    <div class="widget sidebar-widget">
-                        <div class="sidebar-widget-title">
-                            <h3>Бу ойда кўп ўқилганлар</h3>
-                        </div>
-                        <ul>
-                            <li><a href="#">Faith</a> (10)</li>
-                            <li><a href="#">Missions</a> (12)</li>
-                            <li><a href="#">Salvation</a> (34)</li>
-                            <li><a href="#">Worship</a> (14)</li>
-                        </ul>
-                    </div>
-                    <div class="widget sidebar-widget subscribe">
+
+                    <? echo HitArticles::widget()?>
+
+                    <? echo Subscribe::widget()?>
+
+                    <!--<div class="widget sidebar-widget subscribe">
                         <div class="sidebar-widget-title">
                             <h3>Аъзо бўлиш</h3>
                         </div>
-
-
-                        <? if (Yii::$app->session->hasFlash('success')): ?>
+                        <?/* if (Yii::$app->session->hasFlash('success')): */?>
                             <div class="alert alert-success alert-dismissable"
                                  style="padding-top:10px;padding-bottom: 10px;">
-                                <?php echo Yii::$app->session->getFlash('success'); ?>
+                                <?php /*echo Yii::$app->session->getFlash('success'); */?>
                             </div>
-                        <? endif; ?>
-
-                        <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
-
-                        <?= $form->field($subscriber, 'email')->textInput(['class' => 'form-control', 'placeholder' => 'Email...'])->label(false) ?>
-
+                        <?/* endif; */?>
+                        <?php /*$form = ActiveForm::begin(['id' => 'contact-form']); */?>
+                        <?/*= $form->field($subscriber, 'email')->textInput(['class' => 'form-control', 'placeholder' => 'Email...'])->label(false) */?>
                         <div class="form-group">
-                            <?= Html::submitButton('OK', ['class' => 'btn btn-primary ', 'name' => 'contact-button']) ?>
+                            <?/*= Html::submitButton('OK', ['class' => 'btn btn-primary ', 'name' => 'contact-button']) */?>
                         </div>
+                        <?php /*ActiveForm::end(); */?>
+                    </div>-->
 
-                        <?php ActiveForm::end(); ?>
 
-
-                    </div>
                     <div class="widget sidebar-widget tags">
                         <div class="sidebar-widget-title">
                             <h3>Теглар</h3>

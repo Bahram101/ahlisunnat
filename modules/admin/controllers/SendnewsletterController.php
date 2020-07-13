@@ -64,24 +64,21 @@ class SendnewsletterController extends Controller
         if(Yii::$app->request->isPost){
 
             $post = Yii::$app->request->post();
-            $post = (object) $post['Sendnewsletter'];
-            $newsletterId = $post->newsletter_id;
-            var_dump($newsletterId);
-            die;
-
-
             $newsletterId = $post['Sendnewsletter']['newsletter_id'];
             $categoryId = $post['Sendnewsletter']['category_id'];
 
             $emails = Subscribers::getSubscribers();
-
             $newsletter = Newsletters::changeStatusOnNewsletter($newsletterId);
             Sendnewsletter::changeStatusOnSentNewsletter($newsletterId, $categoryId);
 
-            if(Mailer::multipleSend($categoryId, $emails, $newsletter)){
+            Mailer::multipleSend($categoryId, $emails, $newsletter);
+            Yii::$app->session->setFlash('success', 'Рассылка успешно отправлено!');
+            return $this->redirect(['index']);
+
+            /*if(Mailer::multipleSend($categoryId, $emails, $newsletter)){
                 Yii::$app->session->setFlash('success', 'Рассылка успешно отправлено!');
                 return $this->redirect(['index']);
-            }
+            }*/
         }
 
         return $this->render('create', [
@@ -103,6 +100,8 @@ class SendnewsletterController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+
+
     }
 
     /**

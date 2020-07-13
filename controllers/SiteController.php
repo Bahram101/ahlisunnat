@@ -69,16 +69,10 @@ class SiteController extends Controller{
         $articlesForMainPage = Article::articlesForMainPage();
         $latestArticles = Article::getLatestArticles(3);
 
-        $subscriber = new Subscribers();
-        if ($subscriber->load(Yii::$app->request->post()) && $subscriber->addSubscriber() && Mailer::send(Mailer::TYPE_SUBSCRIPTION, $subscriber)) {
-            Yii::$app->session->setFlash('success', 'Проверьте почту!');
-        }
-
         return $this->render('index', [
             'articles'=>$latestArticles['articles'],
             'pages'=>$latestArticles['pages'],
             'articlesForMainPage'=>$articlesForMainPage,
-            'subscriber'=>$subscriber
         ]);
     }
 

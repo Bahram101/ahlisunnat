@@ -65,6 +65,9 @@ if (Yii::$app->controller->action->id === 'login') {
         $(document).ready(function(){
             var editor = CKEDITOR.replaceAll();
             CKFinder.setupCKEditor( editor );
+
+
+
         })
 
     </script>

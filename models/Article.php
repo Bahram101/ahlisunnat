@@ -80,5 +80,9 @@ class Article extends \yii\db\ActiveRecord{
         return $datas;
     }
 
+    public static function getHitArticles($limit = 5){
+        return Article::find()->orderBy('hits desc')->limit($limit)->asArray()->all();
+    }
+
 
 }

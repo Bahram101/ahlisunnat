@@ -11,15 +11,15 @@ $(function () {
      * Get access to plugins
      */
 
-    $('[data-toggle="control-sidebar"]').controlSidebar()
+    $('[data-toggle="control-views"]').controlSidebar()
     $('[data-toggle="push-menu"]').pushMenu()
     var $pushMenu = $('[data-toggle="push-menu"]').data('lte.pushmenu')
-    var $controlSidebar = $('[data-toggle="control-sidebar"]').data('lte.controlsidebar')
+    var $controlSidebar = $('[data-toggle="control-views"]').data('lte.controlsidebar')
     var $layout = $('body').data('lte.layout')
     $(window).on('load', function() {
         // Reinitialize variables on load
         $pushMenu = $('[data-toggle="push-menu"]').data('lte.pushmenu')
-        $controlSidebar = $('[data-toggle="control-sidebar"]').data('lte.controlsidebar')
+        $controlSidebar = $('[data-toggle="control-views"]').data('lte.controlsidebar')
         $layout = $('body').data('lte.layout')
     })
 
@@ -132,17 +132,17 @@ $(function () {
 
             $controlSidebar.options.slide = slide
             if (!slide)
-                $('.control-sidebar').removeClass('control-sidebar-open')
+                $('.control-views').removeClass('control-sidebar-open')
         })
 
         $('[data-sidebarskin="toggle"]').on('click', function () {
-            var $sidebar = $('.control-sidebar')
-            if ($sidebar.hasClass('control-sidebar-dark')) {
-                $sidebar.removeClass('control-sidebar-dark')
-                $sidebar.addClass('control-sidebar-light')
+            var $sidebar = $('.control-views')
+            if ($sidebar.hasClass('control-views-dark')) {
+                $sidebar.removeClass('control-views-dark')
+                $sidebar.addClass('control-views-light')
             } else {
-                $sidebar.removeClass('control-sidebar-light')
-                $sidebar.addClass('control-sidebar-dark')
+                $sidebar.removeClass('control-views-light')
+                $sidebar.addClass('control-views-dark')
             }
         })
 
@@ -150,7 +150,7 @@ $(function () {
             $(this).attr('disabled', true)
             $pushMenu.expandOnHover()
             if (!$('body').hasClass('sidebar-collapse'))
-                $('[data-layout="sidebar-collapse"]').click()
+                $('[data-layout="views-collapse"]').click()
         })
 
         //  Reset options
@@ -161,25 +161,25 @@ $(function () {
             $('[data-layout="layout-boxed"]').attr('checked', 'checked')
         }
         if ($('body').hasClass('sidebar-collapse')) {
-            $('[data-layout="sidebar-collapse"]').attr('checked', 'checked')
+            $('[data-layout="views-collapse"]').attr('checked', 'checked')
         }
 
     }
 
     // Create the new tab
     var $tabPane = $('<div />', {
-        'id': 'control-sidebar-theme-demo-options-tab',
+        'id': 'control-views-theme-demo-options-tab',
         'class': 'tab-pane active'
     })
 
     // Create the tab button
     var $tabButton = $('<li />', {'class': 'active'})
-        .html('<a href=\'#control-sidebar-theme-demo-options-tab\' data-toggle=\'tab\'>'
+        .html('<a href=\'#control-views-theme-demo-options-tab\' data-toggle=\'tab\'>'
             + '<i class="fa fa-wrench"></i>'
             + '</a>')
 
-    // Add the tab button to the right sidebar tabs
-    $('[href="#control-sidebar-home-tab"]')
+    // Add the tab button to the right views tabs
+    $('[href="#control-views-home-tab"]')
         .parent()
         .before($tabButton)
 
@@ -188,12 +188,12 @@ $(function () {
 
     // Layout options
     $demoSettings.append(
-        '<h4 class="control-sidebar-heading">'
+        '<h4 class="control-views-heading">'
         + 'Layout Options'
         + '</h4>'
         // Fixed layout
         + '<div class="form-group">'
-        + '<label class="control-sidebar-subheading">'
+        + '<label class="control-views-subheading">'
         + '<input type="checkbox"data-layout="fixed"class="pull-right"/> '
         + 'Fixed layout'
         + '</label>'
@@ -201,7 +201,7 @@ $(function () {
         + '</div>'
         // Boxed layout
         + '<div class="form-group">'
-        + '<label class="control-sidebar-subheading">'
+        + '<label class="control-views-subheading">'
         + '<input type="checkbox"data-layout="layout-boxed" class="pull-right"/> '
         + 'Boxed Layout'
         + '</label>'
@@ -209,40 +209,40 @@ $(function () {
         + '</div>'
         // Sidebar Toggle
         + '<div class="form-group">'
-        + '<label class="control-sidebar-subheading">'
-        + '<input type="checkbox"data-layout="sidebar-collapse"class="pull-right"/> '
+        + '<label class="control-views-subheading">'
+        + '<input type="checkbox"data-layout="views-collapse"class="pull-right"/> '
         + 'Toggle Sidebar'
         + '</label>'
-        + '<p>Toggle the left sidebar\'s state (open or collapse)</p>'
+        + '<p>Toggle the left views\'s state (open or collapse)</p>'
         + '</div>'
         // Sidebar mini expand on hover toggle
         + '<div class="form-group">'
-        + '<label class="control-sidebar-subheading">'
+        + '<label class="control-views-subheading">'
         + '<input type="checkbox"data-enable="expandOnHover"class="pull-right"/> '
         + 'Sidebar Expand on Hover'
         + '</label>'
-        + '<p>Let the sidebar mini expand on hover</p>'
+        + '<p>Let the views mini expand on hover</p>'
         + '</div>'
         // Control Sidebar Toggle
         + '<div class="form-group">'
-        + '<label class="control-sidebar-subheading">'
-        + '<input type="checkbox"data-controlsidebar="control-sidebar-open"class="pull-right"/> '
+        + '<label class="control-views-subheading">'
+        + '<input type="checkbox"data-controlsidebar="control-views-open"class="pull-right"/> '
         + 'Toggle Right Sidebar Slide'
         + '</label>'
         + '<p>Toggle between slide over content and push content effects</p>'
         + '</div>'
         // Control Sidebar Skin Toggle
         + '<div class="form-group">'
-        + '<label class="control-sidebar-subheading">'
+        + '<label class="control-views-subheading">'
         + '<input type="checkbox"data-sidebarskin="toggle"class="pull-right"/> '
         + 'Toggle Right Sidebar Skin'
         + '</label>'
-        + '<p>Toggle between dark and light skins for the right sidebar</p>'
+        + '<p>Toggle between dark and light skins for the right views</p>'
         + '</div>'
     )
     var $skinsList = $('<ul />', {'class': 'list-unstyled clearfix'})
 
-    // Dark sidebar skins
+    // Dark views skins
     var $skinBlue =
         $('<li />', {style: 'float:left; width: 33.33333%; padding: 5px;'})
             .append('<a href="javascript:void(0)" data-skin="skin-blue" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">'
@@ -292,7 +292,7 @@ $(function () {
                 + '<p class="text-center no-margin">Yellow</p>')
     $skinsList.append($skinYellow)
 
-    // Light sidebar skins
+    // Light views skins
     var $skinBlueLight =
         $('<li />', {style: 'float:left; width: 33.33333%; padding: 5px;'})
             .append('<a href="javascript:void(0)" data-skin="skin-blue-light" style="display: block; box-shadow: 0 0 3px rgba(0,0,0,0.4)" class="clearfix full-opacity-hover">'
@@ -342,11 +342,11 @@ $(function () {
                 + '<p class="text-center no-margin" style="font-size: 12px">Yellow Light</p>')
     $skinsList.append($skinYellowLight)
 
-    $demoSettings.append('<h4 class="control-sidebar-heading">Skins</h4>')
+    $demoSettings.append('<h4 class="control-views-heading">Skins</h4>')
     $demoSettings.append($skinsList)
 
     $tabPane.append($demoSettings)
-    $('#control-sidebar-home-tab').after($tabPane)
+    $('#control-views-home-tab').after($tabPane)
 
     setup()
 

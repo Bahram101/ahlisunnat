@@ -7,7 +7,7 @@ $config = [
 
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','queue'],
     'language' => 'uz-UZ',
     'sourceLanguage' => 'uz',
     'aliases' => [
@@ -22,8 +22,20 @@ $config = [
             'defaultRoute'=> 'article/index',
         ],
     ],
-
     'components' => [
+        /*'queue' => [
+            'class' => \yii\queue\db\Queue::class,
+            'db' => 'db', // компонент подключения к БД
+            'tableName' => '{{%queue}}', // Имя таблицы
+            'channel' => 'default', // Queue channel key
+            'mutex' => \yii\mutex\MysqlMutex::class, // Mutex used to sync queries
+        ],*/
+        'queue' => [
+            'class' => \yii\queue\file\Queue::class,
+            'as log' => \yii\queue\LogBehavior::class,
+            // Индивидуальные настройки драйвера
+        ],
+
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'cNCIG-bUjaLMfHp1xV-bUlzUXlM-cg1I',
