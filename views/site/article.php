@@ -30,7 +30,7 @@ use yii\helpers\Html;
                                                 href="#"><?= $article['category']['title'] ?></a></span>
                                     <span><i class="fa fa-calendar"></i> <?= $article['created'] ?></span>
                                 </span>
-                                <p class="justify-content" style="text-align: justify"><?= $article['text'] ?></p>
+                                <p class="justify-content" style="text-align: justify"><?= $article['fulltext'] ?></p>
                             </div>
                         </div>
                     </article>
