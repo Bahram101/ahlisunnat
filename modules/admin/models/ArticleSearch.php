@@ -68,7 +68,7 @@ class ArticleSearch extends Article
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'introtext', $this->introtext])
-            ->andFilterWhere(['like', 'text', $this->text]);
+            ->andFilterWhere(['like', 'fulltext', $this->fulltext]);
 
         return $dataProvider;
     }

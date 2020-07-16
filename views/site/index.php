@@ -39,7 +39,7 @@ use yii\widgets\LinkPager;
                                         <p class="justify-content"
                                            style="text-align: justify"><?= $article['introtext'] ?></p>
 
-                                        <p style="float:right"><a href="#" class="btn btn-primary batafsil">Батафсил <i
+                                        <p style="float:right"><a href="/article/<?=$article['id']?>" class="btn btn-primary batafsil">Батафсил <i
                                                         class="fa fa-long-arrow-right"></i></a></p>
                                     </div>
                                 </div>

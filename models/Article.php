@@ -85,4 +85,8 @@ class Article extends \yii\db\ActiveRecord{
     }
 
 
+    public function getTags(){
+        return $this->hasMany(Tag::class, ['id'])
+    }
+
 }
