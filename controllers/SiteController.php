@@ -3,11 +3,13 @@
 namespace app\controllers;
 
 use app\models\Article;
+use app\models\ArticleTag;
 use app\models\Category;
 use app\models\Mailer;
 use app\models\Questions;
 use app\models\Quran;
 use app\models\Subscribers;
+use app\models\Tag;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -100,12 +102,12 @@ class SiteController extends Controller{
 
     public function actionCategory($id){
         $articles = Article::getArticlesByCategory($id);
-
         return $this->render('category', [
             'articles'=>$articles['articles'],
             'pages'=>$articles['pages']
         ]);
     }
+
 
 
     public function actionQuestion(){
@@ -130,6 +132,8 @@ class SiteController extends Controller{
     public function actionBooks(){
         return $this->render('books');
     }
+
+
 
 
     /*public function actionLogin(){

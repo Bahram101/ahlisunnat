@@ -2,6 +2,7 @@
 
 use app\widgets\HitArticles;
 use app\widgets\Subscribe;
+use app\widgets\Tags;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
@@ -30,17 +31,12 @@ use yii\widgets\LinkPager;
                                             <a href="/article/<?= Html::encode($article['id']) ?>"><?= Html::encode($article['title']) ?></a>
                                         </h4>
                                         <span class="post-meta meta-data">
-                                        <span><i class="fa fa-archive"></i> <a
-                                                    href="#"><?= $article['category']['title'] ?></a></span>
+                                        <span><i class="fa fa-archive"></i> <a href="/category/<?=$article['category']['id']?>"><?= $article['category']['title'] ?></a></span>
                                         <span><i class="fa fa-calendar"></i> <?= $article['created'] ?></span>
-
-                                            <!--<span><a href="#"><i class="fa fa-comment"></i> 12</a></span>-->
                                     </span>
                                         <p class="justify-content"
                                            style="text-align: justify"><?= $article['introtext'] ?></p>
-
-                                        <p style="float:right"><a href="/article/<?=$article['id']?>" class="btn btn-primary batafsil">Батафсил <i
-                                                        class="fa fa-long-arrow-right"></i></a></p>
+                                        <p style="float:right"><a href="/article/<?=$article['id']?>" class="btn btn-primary batafsil">Батафсил <i class="fa fa-long-arrow-right"></i></a></p>
                                     </div>
                                 </div>
                             </article>
@@ -55,17 +51,12 @@ use yii\widgets\LinkPager;
                                         <a href="/article/<?= Html::encode($article['id']) ?>"><?= Html::encode($article['title']) ?></a>
                                     </h4>
                                     <span class="post-meta meta-data">
-                                    <span><i class="fa fa-archive"></i> <a
-                                                href="#"><?= $article['category']['title'] ?></a></span>
-                                    <span><i class="fa fa-calendar"></i> <?= $article['created'] ?></span>
-
-                                        <!--                                    <span><a href="#"><i class="fa fa-comment"></i> 12</a></span>-->
-                                </span>
+                                        <span><i class="fa fa-archive"></i> <a href="/category/<?=$article['category']['id']?>"><?= $article['category']['title'] ?></a></span>
+                                        <span><i class="fa fa-calendar"></i> <?= $article['created'] ?></span>
+                                    </span>
                                     <p class="justify-content"
                                        style="text-align: justify"><?= $article['introtext'] ?></p>
-
-                                    <p style="float:right"><a href="#" class="btn btn-primary batafsil">Батафсил <i
-                                                    class="fa fa-long-arrow-right"></i></a></p>
+                                    <p style="float:right"><a href="#" class="btn btn-primary batafsil">Батафсил <i class="fa fa-long-arrow-right"></i></a></p>
                                 </div>
                             </div>
                         </article>
@@ -94,37 +85,8 @@ use yii\widgets\LinkPager;
 
                     <? echo Subscribe::widget()?>
 
-                    <!--<div class="widget sidebar-widget subscribe">
-                        <div class="sidebar-widget-title">
-                            <h3>Аъзо бўлиш</h3>
-                        </div>
-                        <?/* if (Yii::$app->session->hasFlash('success')): */?>
-                            <div class="alert alert-success alert-dismissable"
-                                 style="padding-top:10px;padding-bottom: 10px;">
-                                <?php /*echo Yii::$app->session->getFlash('success'); */?>
-                            </div>
-                        <?/* endif; */?>
-                        <?php /*$form = ActiveForm::begin(['id' => 'contact-form']); */?>
-                        <?/*= $form->field($subscriber, 'email')->textInput(['class' => 'form-control', 'placeholder' => 'Email...'])->label(false) */?>
-                        <div class="form-group">
-                            <?/*= Html::submitButton('OK', ['class' => 'btn btn-primary ', 'name' => 'contact-button']) */?>
-                        </div>
-                        <?php /*ActiveForm::end(); */?>
-                    </div>-->
+                    <? echo Tags::widget()?>
 
-
-                    <div class="widget sidebar-widget tags">
-                        <div class="sidebar-widget-title">
-                            <h3>Теглар</h3>
-                        </div>
-                        <div class="tag-cloud">
-                            <a href="#">Faith</a> <a href="#">Heart</a> <a href="#">Love</a> <a href="#">Praise</a> <a
-                                    href="#">Sin</a> <a href="#">Soul</a> <a href="#">Missions</a> <a
-                                    href="#">Worship</a> <a href="#">Faith</a> <a href="#">Heart</a> <a
-                                    href="#">Love</a> <a href="#">Praise</a> <a href="#">Sin</a> <a href="#">Soul</a> <a
-                                    href="#">Missions</a> <a href="#">Worship</a>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

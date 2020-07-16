@@ -5,19 +5,20 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "tags".
+ * This is the model class for table "article_tag".
  *
  * @property int $id
- * @property string $title
+ * @property int $article_id
+ * @property int $tag_id
  */
-class Tag extends \yii\db\ActiveRecord
+class ArticleTag extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'tags';
+        return 'article_tag';
     }
 
     /**
@@ -26,8 +27,8 @@ class Tag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required'],
-            [['title'], 'string', 'max' => 255],
+            [['article_id', 'tag_id'], 'required'],
+            [['article_id', 'tag_id'], 'integer'],
         ];
     }
 
@@ -38,12 +39,8 @@ class Tag extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
+            'article_id' => 'Article ID',
+            'tag_id' => 'Tag ID',
         ];
-    }
-
-    public static function getTags($limit = 16){
-        $tags = self::find()->limit($limit)->asArray()->all();
-        return $tags;
     }
 }

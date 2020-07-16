@@ -2,6 +2,7 @@
 
 use app\widgets\HitArticles;
 use app\widgets\Subscribe;
+use app\widgets\Tags;
 use yii\helpers\Html;
 
 ?>
@@ -31,6 +32,16 @@ use yii\helpers\Html;
                                     <span><i class="fa fa-calendar"></i> <?= $article['created'] ?></span>
                                 </span>
                                 <p class="justify-content" style="text-align: justify"><?= $article['fulltext'] ?></p>
+
+                                <div class="widget sidebar-widget tags" style="margin-bottom:0">
+                                    <div class="tag-cloud">
+                                        <? if($article['tags']):?>
+                                        <?foreach($article['tags'] as $tag):?>
+                                            <a href="/tag/article?tag=<?=$tag['title']?>"><?=$tag['title']?></a>
+                                        <? endforeach;?>
+                                        <? endif;?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </article>
@@ -54,18 +65,7 @@ use yii\helpers\Html;
 
                     <?=Subscribe::widget()?>
 
-                    <div class="widget sidebar-widget tags">
-                        <div class="sidebar-widget-title">
-                            <h3>Теглар</h3>
-                        </div>
-                        <div class="tag-cloud">
-                            <a href="#">Faith</a> <a href="#">Heart</a> <a href="#">Love</a> <a href="#">Praise</a> <a
-                                    href="#">Sin</a> <a href="#">Soul</a> <a href="#">Missions</a> <a
-                                    href="#">Worship</a> <a href="#">Faith</a> <a href="#">Heart</a> <a
-                                    href="#">Love</a> <a href="#">Praise</a> <a href="#">Sin</a> <a href="#">Soul</a> <a
-                                    href="#">Missions</a> <a href="#">Worship</a>
-                        </div>
-                    </div>
+                    <?=Tags::widget()?>
                 </div>
             </div>
         </div>

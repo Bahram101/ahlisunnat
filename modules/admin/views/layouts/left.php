@@ -35,9 +35,7 @@
                     ['label' => 'Категории', 'icon' => 'dashboard', 'url' => ['category/index']],
                     ['label' => 'Вопросы', 'icon' => 'dashboard', 'url' => ['questions/index']],
                     ['label' => 'Подписчики', 'icon' => 'dashboard', 'url' => ['subscribers/index']],
-//                    ['label' => 'Рассылки', 'icon' => 'dashboard', 'url' => ['newsletters/index']],
-//                    ['label' => 'Отправить рассылки', 'icon' => 'dashboard', 'url' => ['sendnewsletter/index']],
-//                    ['label' => 'Вопросы', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                    ['label' => 'Теги', 'icon' => 'dashboard', 'url' => ['tag/index']],
                     [
                         'label' => 'Рассылки',
                         'icon' => 'share',

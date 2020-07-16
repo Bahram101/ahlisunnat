@@ -61,7 +61,7 @@ class Article extends \yii\db\ActiveRecord{
 
     public static function getArticle($id){
         $id = (int)$id;
-        $article = Article::find()->where(['id'=>$id])->asArray()->one();
+        $article = Article::find()->with('tags')->where(['id'=>$id])->asArray()->one();
         return $article;
     }
 
@@ -80,13 +80,25 @@ class Article extends \yii\db\ActiveRecord{
         return $datas;
     }
 
+
+    public static function getArticlesByTagName($tag){
+        $tagId = Tag::find()->where(['title'=>$tag])->asArray()->one();
+        $articleIds = ArticleTag::find()->where(['tag_id'=>$tagId])->asArray()->all();
+        foreach($articleIds as $articleId){
+            $articles[] = Article::find()->where(['id'=> $articleId['article_id']])->with('category')->asArray()->all();
+        }
+        return $articles;
+    }
+
+
     public static function getHitArticles($limit = 5){
         return Article::find()->orderBy('hits desc')->limit($limit)->asArray()->all();
     }
 
 
     public function getTags(){
-        return $this->hasMany(Tag::class, ['id'])
+        return $this->hasMany(Tag::class, ['id'=>'tag_id'])
+            ->viaTable('article_tag', ['article_id' => 'id']);
     }
 
 }

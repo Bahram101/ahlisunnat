@@ -20,29 +20,30 @@ use yii\widgets\LinkPager;
                             </span>
                         </div>
                     </div>
-
-                    <? foreach ($articles as $article):?>
+                    <? if($articles):?>
+                        <? foreach ($articles as $article):?>
                         <article class="post ">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
-                                    <h4><a href="/article/<?=Html::encode($article['id'])?>"><?= Html::encode($article['title'])?></a></h4>
+                                    <h4><a href="/article/<?=Html::encode($article[0]['id'])?>"><?= Html::encode($article[0]['title'])?></a></h4>
                                     <span class="post-meta meta-data">
-                                    <span><i class="fa fa-archive"></i> <a href="#"><?=$article['category']['title']?></a></span>
-                                    <span><i class="fa fa-calendar"></i> <?= $article['created']?></span>
+                                    <span><i class="fa fa-archive"></i> <a href="#"><?=$article[0]['category']['title']?></a></span>
+                                    <span><i class="fa fa-calendar"></i> <?= $article[0]['created']?></span>
                                 </span>
-                                    <p class="justify-content" style="text-align: justify"><?= $article['introtext']?></p>
+                                    <p class="justify-content" style="text-align: justify"><?= $article[0]['introtext']?></p>
 
-                                    <p style="float:right"><a href="/article/<?=$article['id']?>" class="btn btn-primary batafsil">Батафсил <i class="fa fa-long-arrow-right"></i></a></p>
+                                    <p style="float:right"><a href="/article/<?=$article[0]['id']?>" class="btn btn-primary batafsil">Батафсил <i class="fa fa-long-arrow-right"></i></a></p>
                                 </div>
                             </div>
                         </article>
                     <? endforeach?>
+                    <? endif;?>
 
-                    <?=
+                    <?/*=
                     LinkPager::widget([
                         'pagination' => $pages
                     ])
-                    ?>
+                    */?>
                 </div>
                 <!-- Start Sidebar -->
                 <div class="col-md-3 sidebar" >
