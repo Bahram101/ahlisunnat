@@ -30,7 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
 //            'introtext:ntext',
 //            'text:ntext',
-            'catalog_id',
+//            'catalog_id',
+            [
+                'format'=>'text',
+                'attribute'=> 'catalog_id',
+                'value'=> function($data){
+                    return $data->category->title;
+                },
+            ],
             'created',
             //'modified',
             'hits',

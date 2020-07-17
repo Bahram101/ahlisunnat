@@ -136,7 +136,7 @@ class SiteController extends Controller{
 
 
 
-    /*public function actionLogin(){
+    public function actionLogin(){
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -150,13 +150,13 @@ class SiteController extends Controller{
         return $this->render('login', [
             'model' => $model,
         ]);
-    }*/
+    }
 
 
-    /*public function actionLogout(){
+    public function actionLogout(){
         Yii::$app->user->logout();
         return $this->goHome();
-    }*/
+    }
 
 
     /*public function actionContact(){
