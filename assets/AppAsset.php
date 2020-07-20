@@ -22,20 +22,20 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
 //            "js/jquery-2.0.0.min.js",
-            "js/modernizr.js",
-            "plugins/prettyphoto/js/prettyphoto.js",
-            "js/helper-plugins.js",
-            "js/bootstrap.js",
-            "js/waypoints.js",
-            "plugins/mediaelement/mediaelement-and-player.min.js",
-            "js/init.js",
-            "plugins/flexslider/js/jquery.flexslider.js",
-            "plugins/countdown/js/jquery.countdown.min.js",
-            'js/real-accessability.js?ver=1.0',
-            'js/main.js'
+        "js/modernizr.js",
+        "plugins/prettyphoto/js/prettyphoto.js",
+        "js/helper-plugins.js",
+        "js/bootstrap.js",
+        "js/waypoints.js",
+        "plugins/mediaelement/mediaelement-and-player.min.js",
+        "js/init.js",
+        "plugins/flexslider/js/jquery.flexslider.js",
+        "plugins/countdown/js/jquery.countdown.min.js",
+        'js/real-accessability.js?ver=1.0',
+        'js/main.js'
     ];
     public $depends = [
-       /* 'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',*/
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

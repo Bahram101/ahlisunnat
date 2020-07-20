@@ -96,6 +96,8 @@ class SiteController extends Controller{
 
     public function actionArticle($id){
         $article = Article::getArticle($id);
+
+
         return $this->render('article', compact('article'));
     }
 

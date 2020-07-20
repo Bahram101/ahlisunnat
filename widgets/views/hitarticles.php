@@ -4,7 +4,7 @@
     </div>
     <ul>
         <?  foreach($hitArticles as $article): ?>
-            <li><a href="/artilce/<?=$article['id']?>"><?=$article['title'] ?></a></li>
+            <li><a href="/article/<?=$article['id']?>"><?=$article['title'] ?></a></li>
         <? endforeach; ?>
     </ul>
 </div>

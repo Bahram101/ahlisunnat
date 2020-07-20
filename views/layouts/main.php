@@ -1,8 +1,18 @@
 <?
+use app\models\Praytimes;
+use app\models\Cities;
+use yii\helpers\Json;
+
+
+$city_id = $_COOKIE['city_id'] ? $_COOKIE['city_id'] : '20720';
+
+$city = Cities::find()->where(['id'=>$city_id])->asArray()->one();
 
 $json = file_get_contents(
-    'https://namaztimes.kz/api/praytimes?id=20720&type=json'
+//    'https://namaztimes.kz/api/praytimes?id=20720&type=json'
+    'https://namaztimes.kz/api/praytimes?id='.$city['id'].'&type=json'
 );
+
 $months = [
     'islamic' => [
         'ЗУЛ-ҲИЖЖА','МУҲАРРАМ','САФАР','РАБИУЛ-АВВАЛ','РАБИУЛ-ОХИР',
@@ -10,8 +20,8 @@ $months = [
         'ШАВВОЛ','ЗУЛ-ҚАЪДА'
     ],
     'ru' => [
-        'Январь', 'Февраль', 'Наурыз', 'Апрель',
-        'Май', 'июнь', 'июль', 'август',
+        'Январь', 'Февраль', 'Март', 'Апрель',
+        'Май', 'Июнь', 'Июль', 'Август',
         'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
     ]
 ];
@@ -61,14 +71,13 @@ foreach ($array as $key => $value) {
 }
 
 
-
 use app\widgets\Alert;
+use app\widgets\CitySearchWidget;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-
 AppAsset::register($this);
 
 $this->beginPage()
@@ -110,20 +119,29 @@ $this->beginPage()
                     </div>
 
                     <div class="col-md-3 notice-bar-title date-col" >
-                        <span class="notice-bar-title-icon hidden-xs">
+                        <!--<span class="notice-bar-title-icon hidden-xs">
                             <i class="fa fa-calendar fa-3x" style="color:white"></i>
-                        </span>
+                        </span>-->
                         <h6 class="date text-white"><?=$islamic_date?></h6>
                         <h6 class="date" style="color:#F69C1F" id="date"><?=$Date?></h6>
                     </div>
 
-                    <div class="col-md-2 city-col"  >
+                    <!--<div class="col-md-2 city-col"  >
                         <div class="form-group" style="margin-bottom: 0;">
                             <input type="text" class="form-control cityInput" id="name" placeholder="Тошкент"  >
                         </div>
+                    </div>-->
+
+                    <div class="col-md-3 city-col"  >
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <? echo CitySearchWidget::widget(); ?>
+                        </div>
                     </div>
 
+                    <? //echo CitySearchWidget::widget(); ?>
+
                     <div id="counter" class="col-md-4 counter time-col">
+                        <div class="text-center" id="shahar" style="color:white;font-weight:bold ;" ><?=$city['name_uz']?></div>
                         <div class="timer-col">
                             <span class="timer-type time" >Имсок</span>
                             <span id="imsok" class="Islamic_t">00:00</span>
@@ -150,7 +168,7 @@ $this->beginPage()
                         </div>
                     </div>
 
-                    <div class="col-md-3 icons-col">
+                    <div class="col-md-2 icons-col">
                         <div id="real-accessability" style="display:inherit;">
                             <ul>
                                 <li><a href="#" id="real-accessability-biggerFont"></a></li>
@@ -158,7 +176,7 @@ $this->beginPage()
                                 <li><a href="#" id="real-accessability-grayscale" class="real-accessability-effect"></a></li>
                                 <li><a href="#" id="real-accessability-invert" class="real-accessability-effect"></a></li>
                                 <li><a href="#" id="real-accessability-linkHighlight"></a></li>
-                                <li><a href="#" id="real-accessability-regularFont"></a></li>
+<!--                                <li><a href="#" id="real-accessability-regularFont"></a></li>-->
                                 <li><a href="#" id="real-accessability-reset"></a></li>
 
                             </ul>
@@ -583,7 +601,8 @@ $this->beginPage()
 <!-- SCRIPTS
       ================================================== -->
 
-<script src="/js/jquery-2.0.0.min.js"></script>
+<!--<script src="/js/jquery-2.0.0.min.js"></script>-->
+<script src="/js/jquery-3.5.1.min.js"></script>
 
 <script type='text/javascript' src='/js/real-accessability.js?ver=1.0'></script>
 
@@ -629,12 +648,12 @@ $this->beginPage()
     if(mydata){
         //tt = mydata;
 
-        document.getElementById("imsok").innerHTML = mydata.praytimes.imsak;
-        document.getElementById("kuesh").innerHTML = mydata.praytimes.kun;
-        document.getElementById("peshin").innerHTML = mydata.praytimes.besin;
-        document.getElementById("asr").innerHTML = mydata.praytimes.ekindi;
-        document.getElementById("shom").innerHTML = mydata.praytimes.aqsham;
-        document.getElementById("hufton").innerHTML = mydata.praytimes.quptan;
+        document.getElementById("imsok").innerHTML = mydata.praytimes.imsak.replace("*", '');
+        document.getElementById("kuesh").innerHTML = mydata.praytimes.kun.replace("*", '');
+        document.getElementById("peshin").innerHTML = mydata.praytimes.besin.replace("*", '');
+        document.getElementById("asr").innerHTML = mydata.praytimes.ekindi.replace("*", '');
+        document.getElementById("shom").innerHTML = mydata.praytimes.aqsham.replace("*", '');
+        document.getElementById("hufton").innerHTML = mydata.praytimes.quptan.replace("*", '');
 
         document.getElementById("<?= $serverDate ?>").classList.add("activeTime");
 
@@ -655,6 +674,69 @@ $this->beginPage()
         document.getElementById("dva").classList.remove("dva");
     }
 
+</script>
+<script type="text/javascript">
+    function getValue() {
+        var G = $('#w0').val();
+        if( G != ""){
+            jsonurl = '/json/times?id=' + G;
+
+            var mydata = [];
+
+            $.ajax({
+                url: jsonurl,
+                async: false,
+                dataType: 'json',
+                success: function (json) {
+                    mydata = json;
+                }
+            });
+            if(mydata){
+                tt = mydata;
+
+                // var newstr = str.replace("*", '');
+                document.cookie = "city_id="+mydata.attributes.ID;
+
+
+                document.getElementById("imsok").innerHTML= mydata.praytimes.imsak.replace("*", '');
+                document.getElementById("kuesh").innerHTML= mydata.praytimes.kun.replace("*", '');
+                document.getElementById("peshin").innerHTML= mydata.praytimes.besin.replace("*", '');
+                document.getElementById("asr").innerHTML= mydata.praytimes.ekindi.replace("*", '');
+                document.getElementById("shom").innerHTML= mydata.praytimes.aqsham.replace("*", '');
+                document.getElementById("hufton").innerHTML= mydata.praytimes.quptan.replace("*", '');
+
+                document.getElementById("shahar").innerHTML= mydata.attributes.CityName;
+
+            }
+        }
+
+    }
+    $(document).ready(function(){
+        $("#menu").on("click","a", function (event) {
+            event.preventDefault();
+            var id  = $(this).attr('href'),
+                top = $(id).offset().top;
+            $('body,html').animate({scrollTop: top}, 1500);
+        });
+    });
+    $(document).ready(function(){
+        $('body').append('<div id="toTop" class="btn btn-primary d-print-none"><span class="glyphicon glyphicon-chevron-up"></span>⇑</div>');
+        $(window).scroll(function () {
+            if ($(this).scrollTop() != 0) {
+                $('#toTop').fadeIn();
+            } else {
+                $('#toTop').fadeOut();
+            }
+        });
+        $('#toTop').click(function(){
+            $("html, body").animate({ scrollTop: 0 }, 600);
+            return false;
+        });
+    });
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
 </script>
 
 <?php $this->endBody() ?>
