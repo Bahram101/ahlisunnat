@@ -90,7 +90,8 @@ $config = [
                 'tag/article/<tag:[a-z]+>' => 'tag/article',
                 'sources' => 'site/sources',
                 'questions' => 'site/question',
-                'books' => 'site/books'
+                'books' => 'site/books',
+                'suradua/<id:\d+>' => 'suradua/view'
             ],
         ],
 

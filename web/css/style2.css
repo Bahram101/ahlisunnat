@@ -47,8 +47,8 @@
 }
 .city-col{
     display: flex;
-    align-self: flex-end;
-
+    align-items: center;
+    justify-content: center;
 }
 .icons-col{
     margin-top: 10px;
@@ -118,6 +118,16 @@ footer .footer-widget{
 
 body .container{
     /*background: white;*/
+}
+.none{
+    display:none;
+}
+#searchIcon{
+    font-size:16px;
+    padding-left: 10px;
+}
+#searchIcon:hover{
+    cursor: pointer;
 }
 .megamenu-container a {
     text-decoration: none;

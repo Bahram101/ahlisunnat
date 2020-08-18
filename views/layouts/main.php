@@ -113,7 +113,7 @@ $this->beginPage()
     <header class="site-header" style="background: #F8F7F3;">
         <div class="notice-bar" style="background: #142C4C">
             <div class="container">
-                <div class="row" style="display: flex;align-items: flex-start; flex-wrap:wrap; justify-content: space-around">
+                <div class="row" style="display: flex;align-items: center; flex-wrap:wrap; justify-content: space-around">
                     <div class="col-md-12 hidden-lg hidden-md site-name">
                         <h3 style="color:white;text-transform: uppercase;font-family: Calibri;text-align: center;font-weight: bold">ahlisunnat</h3>
                     </div>
@@ -126,22 +126,19 @@ $this->beginPage()
                         <h6 class="date" style="color:#F69C1F" id="date"><?=$Date?></h6>
                     </div>
 
-                    <!--<div class="col-md-2 city-col"  >
-                        <div class="form-group" style="margin-bottom: 0;">
-                            <input type="text" class="form-control cityInput" id="name" placeholder="Тошкент"  >
-                        </div>
-                    </div>-->
-
                     <div class="col-md-3 city-col"  >
-                        <div class="form-group" style="margin-bottom: 0;">
+                        <div class="text-center" id="shahar" style="color:white; font-size:20px" >
+                            <?=$city['name_uz']?><i class=" fa fa-search" id="searchIcon"></i>
+                        </div>
+
+                        <div class="form-group none" id="citySearch"  style="margin-bottom: 0;">
                             <? echo CitySearchWidget::widget(); ?>
                         </div>
+
                     </div>
 
-                    <? //echo CitySearchWidget::widget(); ?>
-
                     <div id="counter" class="col-md-4 counter time-col">
-                        <div class="text-center" id="shahar" style="color:white;font-weight:bold ;" ><?=$city['name_uz']?></div>
+                        <!--<div class="text-center" id="shahar" style="color:white;font-weight:bold ;" ><?/*=$city['name_uz']*/?></div>-->
                         <div class="timer-col">
                             <span class="timer-type time" >Имсок</span>
                             <span id="imsok" class="Islamic_t">00:00</span>
@@ -168,7 +165,7 @@ $this->beginPage()
                         </div>
                     </div>
 
-                    <div class="col-md-2 icons-col">
+                    <div class="col-md-2 icons-col" style="padding:0">
                         <div id="real-accessability" style="display:inherit;">
                             <ul>
                                 <li><a href="#" id="real-accessability-biggerFont"></a></li>
@@ -560,7 +557,7 @@ $this->beginPage()
                     <div class="caaba">
                         <h4>Қибла истиқомати</h4>
                         <div class="img">
-                            <img src="/images/01.png" alt="Logo">
+                            <a href="/qibla"><img src="/images/01.png" alt="Logo"></a>
                         </div>
 
                     </div>
@@ -569,7 +566,7 @@ $this->beginPage()
                     <div class="suradua">
                         <h4>Суралар ва дуолар</h4>
                         <div class="img">
-                            <img src="/images/02.png" alt="Logo">
+                            <a href="/suradua"><img src="/images/02.png" alt="Logo"></a>
                         </div>
                     </div>
                 </div>
@@ -577,7 +574,7 @@ $this->beginPage()
                     <div class="paygambar">
                         <h4>М.Саид Арвос устоз ила</h4>
                         <div class="img">
-                            <img src="/images/03.png" alt="Logo">
+                            <a href="/category/30"><img src="/images/03.png" alt="Logo"></a>
                         </div>
                     </div>
                 </div>
@@ -705,7 +702,7 @@ $this->beginPage()
                 document.getElementById("shom").innerHTML= mydata.praytimes.aqsham.replace("*", '');
                 document.getElementById("hufton").innerHTML= mydata.praytimes.quptan.replace("*", '');
 
-                document.getElementById("shahar").innerHTML= mydata.attributes.CityName;
+                document.getElementById("shahar").innerHTML= mydata.attributes.CityName+" <i class=' fa fa-search' id='search2'></i>";
 
             }
         }

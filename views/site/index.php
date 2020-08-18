@@ -69,25 +69,8 @@ use yii\widgets\LinkPager;
                     ?>
                 </div>
                 <!-- Start Sidebar -->
-                <div class="col-md-3 sidebar">
-                    <div class="widget sidebar-widget search-form-widget hidden-sm hidden-xs ">
-                        <div class="input-group input-group-lg">
-                            <input type="text" class="form-control" placeholder="Search Posts...">
-                            <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search fa-lg"></i>
-                                    </button>
-                                </span>
-                        </div>
-                    </div>
+                <? echo $this->render('/partials/sidebar.php')?>
 
-                    <? echo HitArticles::widget()?>
-
-                    <? echo Subscribe::widget()?>
-
-                    <? echo Tags::widget()?>
-
-                </div>
             </div>
         </div>
     </div>

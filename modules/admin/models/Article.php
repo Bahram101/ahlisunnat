@@ -49,14 +49,14 @@ class Article extends \yii\db\ActiveRecord{
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'introtext' => 'Introtext',
-            'text' => 'Text',
-            'catalog_id' => 'Catalog ID',
-            'created' => 'Created',
+            'title' => 'Название',
+            'introtext' => 'Описание',
+            'text' => 'Текст',
+            'catalog_id' => 'Категория',
+            'created' => 'Дата',
             'modified' => 'Modified',
-            'hits' => 'Hits',
-            'on_main_page' => 'On Main Page',
+            'hits' => 'Просмотр',
+            'on_main_page' => 'Главная страница',
         ];
     }
 

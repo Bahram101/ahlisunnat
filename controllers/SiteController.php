@@ -14,6 +14,7 @@ use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -103,10 +104,16 @@ class SiteController extends Controller{
 
 
     public function actionCategory($id){
+        $category = Category::findOne($id);
+        $subCat = Category::find()->where(['parent_id'=>$category['id']])->asArray()->all();
+        if(empty($category))
+            throw new HttpException(404, 'Категория топилмади!');
         $articles = Article::getArticlesByCategory($id);
         return $this->render('category', [
             'articles'=>$articles['articles'],
-            'pages'=>$articles['pages']
+            'pages'=>$articles['pages'],
+            'category'=> $category,
+            'subCat'=> $subCat
         ]);
     }
 

@@ -34,34 +34,34 @@
                     ['label' => 'Статьи', 'icon' => 'file-code-o', 'url' => ['article/index']],
                     ['label' => 'Категории', 'icon' => 'dashboard', 'url' => ['category/index']],
                     ['label' => 'Вопросы', 'icon' => 'dashboard', 'url' => ['questions/index']],
-                    ['label' => 'Подписчики', 'icon' => 'dashboard', 'url' => ['subscribers/index']],
-                    ['label' => 'Теги', 'icon' => 'dashboard', 'url' => ['tag/index']],
-                    [
-                        'label' => 'Рассылки',
-                        'icon' => 'share',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Создать рассылку', 'icon' => 'file-code-o', 'url' => ['newsletters/index'],],
-                            ['label' => 'Отправить рассылку', 'icon' => 'dashboard', 'url' => ['sendnewsletter/index'],],
-                            /*[
-                                'label' => 'Level One',
-                                'icon' => 'circle-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                        ],
-                                    ],
-                                ],
-                            ],*/
-                        ],
-                    ],
+//                    ['label' => 'Подписчики', 'icon' => 'dashboard', 'url' => ['subscribers/index']],
+//                    ['label' => 'Теги', 'icon' => 'dashboard', 'url' => ['tag/index']],
+//                    [
+//                        'label' => 'Рассылки',
+//                        'icon' => 'share',
+//                        'url' => '#',
+//                        'items' => [
+//                            ['label' => 'Создать рассылку', 'icon' => 'file-code-o', 'url' => ['newsletters/index'],],
+//                            ['label' => 'Отправить рассылку', 'icon' => 'dashboard', 'url' => ['sendnewsletter/index'],],
+//                            /*[
+//                                'label' => 'Level One',
+//                                'icon' => 'circle-o',
+//                                'url' => '#',
+//                                'items' => [
+//                                    ['label' => 'Level Two', 'icon' => 'circle-o', 'url' => '#',],
+//                                    [
+//                                        'label' => 'Level Two',
+//                                        'icon' => 'circle-o',
+//                                        'url' => '#',
+//                                        'items' => [
+//                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
+//                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
+//                                        ],
+//                                    ],
+//                                ],
+//                            ],*/
+//                        ],
+//                    ],
                 ],
             ]
         ) ?>

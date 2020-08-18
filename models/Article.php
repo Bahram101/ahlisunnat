@@ -45,6 +45,7 @@ class Article extends \yii\db\ActiveRecord{
         return Article::find()->where(['on_main_page'=>1])->with('category')->orderBy('modified desc')->limit($limit)->asArray()->all();
     }
 
+
     public static function getLatestArticles($pageSize = 5){
         $query = Article::find();
         $pages = new Pagination([
@@ -61,7 +62,7 @@ class Article extends \yii\db\ActiveRecord{
 
     public static function getArticle($id){
         $id = (int)$id;
-        $article = Article::find()->with('tags')->where(['id'=>$id])->asArray()->one();
+        $article = Article::find()->with('category')->where(['id'=>$id])->asArray()->one();
         return $article;
     }
 

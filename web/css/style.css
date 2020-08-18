@@ -67,7 +67,7 @@ html, hmtl a{
 }
 a{
     color:#5e5e5e;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     cursor: pointer;
 
     -webkit-transition: color 0.1s linear 0s;
@@ -553,7 +553,7 @@ label {
     text-decoration:none;
 }
 .meta-data > span{
-    margin-right:20px;
+    margin-right:10px;
     display:inline-block;
 }
 .meta-data i{

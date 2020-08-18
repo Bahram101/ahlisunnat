@@ -26,9 +26,9 @@ use yii\web\JsExpression;
 
         echo Select2::widget( [
             'name' => 'city_id',
-            'initValueText' =>Yii::t('app', 'Write city name...'),
+            'initValueText' =>Yii::t('app', 'Шаҳар номини ёзинг...'),
             'language' => 'uz-UZ',
-            'options' => ['placeholder' => Yii::t('app', 'Write city name...')],
+            'options' => ['placeholder' => Yii::t('app', 'Шаҳар номи...')],
             'pluginOptions' => [
                 'allowClear' => false,
                 'minimumInputLength' => 1,
@@ -49,6 +49,7 @@ use yii\web\JsExpression;
             'submit',null,'OK',
             [
                 'class' => 'btn btn-success',
+                'id' => 'ok',
                 'onclick' => 'getValue()',
                 'style' => 'padding: .22rem .75rem;'
             ])
