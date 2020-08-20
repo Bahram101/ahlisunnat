@@ -7,7 +7,6 @@ use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 class Module extends \yii\base\Module{
 
-//    public $layout = '/admin';
 
     public $controllerNamespace = 'app\modules\admin\controllers';
 
@@ -20,6 +19,18 @@ class Module extends \yii\base\Module{
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        //'actions' => ['special-callback'],
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return !Yii::$app->user->isGuest;
+                        }
+                    ],
+                ],
+            ]
 
         ];
     }

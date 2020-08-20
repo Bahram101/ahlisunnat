@@ -6,6 +6,7 @@ $db = require __DIR__ . '/db.php';
 $config = [
 
     'id' => 'basic',
+    'name' => 'Аҳлисуннат',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log','queue'],
     'language' => 'uz-UZ',
