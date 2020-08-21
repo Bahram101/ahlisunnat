@@ -126,15 +126,36 @@ body .container{
     font-size:16px;
     padding-left: 10px;
 }
+
 #searchIcon:hover{
     cursor: pointer;
 }
+
+#searchClose:hover{
+    cursor: pointer;
+}
+
 .megamenu-container a {
     text-decoration: none;
     color: #007F7B;
 }
 
-
+@media(max-width: 400px){
+    .date1{
+        display: none;
+    }
+    .date2{
+        display: block;
+    }
+}
+@media(min-width: 401px){
+    .date1{
+        display: block;
+    }
+    .date2{
+        display: none;
+    }
+}
 @media(max-width:619px){
     .site-header .menu-toggle{
         margin: 16px 10px 0 0;

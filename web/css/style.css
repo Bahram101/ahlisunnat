@@ -178,10 +178,10 @@ h3{
     font-size:24px;
 }
 h4{
-    font-size:16px;
+    font-size: 16px;
     text-transform:uppercase;
     font-weight:700;
-    letter-spacing:2px;
+    letter-spacing: 1px;
     font-family: 'Calibri', sans-serif;
 }
 h5{

@@ -30,13 +30,19 @@ $jsonN = json_decode($json,true);
 date_default_timezone_set('Asia/Almaty');
 //Islamic Date
 $date = strip_tags($jsonN['islamic_date']);
-$chunks = explode ("-", $date, 3);
-$islamic_date =  $chunks[2].' - '.$months['islamic'][$chunks[1]].', '.$chunks[0].' йил';
+$chunks = explode("-", $date, 3);
+
+if($chunks[1][0] == '0'){
+    $chunks[1] = substr($chunks[1], 1, 1);
+}
+
+$islamic_date =  $chunks[2].' - '.$months['islamic'][$chunks[1]].', '.$chunks[0].'';
+//debug($islamic_date);die;
 //Date
 $month = date("n")-1;
 $day = date("j");
 $year = date("Y");
-$Date = $day.' - '.$months['ru'][$month].', '.$year.' йил';
+$Date = $day.' - '.$months['ru'][$month].', '.$year.'';
 
 $array = [
     0 =>'imsak',
@@ -115,15 +121,17 @@ $this->beginPage()
             <div class="container">
                 <div class="row" style="display: flex;align-items: center; flex-wrap:wrap; justify-content: space-around">
                     <div class="col-md-12 hidden-lg hidden-md site-name">
-                        <h3 style="color:white;text-transform: uppercase;font-family: Calibri;text-align: center;font-weight: bold">ahlisunnat</h3>
+                        <a href="/"><h3 style="color:white;text-transform: uppercase;font-family: Calibri;text-align: center;font-weight: bold">ahlisunnat</h3></a>
                     </div>
 
                     <div class="col-md-3 notice-bar-title date-col" >
                         <!--<span class="notice-bar-title-icon hidden-xs">
                             <i class="fa fa-calendar fa-3x" style="color:white"></i>
                         </span>-->
-                        <h6 class="date text-white"><?=$islamic_date?></h6>
-                        <h6 class="date" style="color:#F69C1F" id="date"><?=$Date?></h6>
+                        <h6 class="date date1 text-white"><?=$islamic_date?> йил</h6>
+                        <h6 class="date date1" style="color:#F69C1F" id="date"><?=$Date?> йил</h6>
+                        <h6 class="date date2 text-white"><?=$islamic_date?> й</h6>
+                        <h6 class="date date2" style="color:#F69C1F" id="date"><?=$Date?> й</h6>
                     </div>
 
                     <div class="col-md-3 city-col"  >
@@ -131,7 +139,7 @@ $this->beginPage()
                             <?=$city['name_uz']?><i class=" fa fa-search" id="searchIcon"></i>
                         </div>
 
-                        <div class="form-group none" id="citySearch"  style="margin-bottom: 0;">
+                        <div class="form-group none" id="citySearch"  style="margin-bottom: 0; width: 100%;">
                             <? echo CitySearchWidget::widget(); ?>
                         </div>
 
@@ -552,49 +560,14 @@ $this->beginPage()
     <footer class="site-footer">
         <div class="container">
             <div class="row">
-                <!-- Start Footer Widgets -->
-                <div class="col-md-4 col-sm-4 widget footer-widget">
-                    <div class="caaba">
-                        <h4>Қибла истиқомати</h4>
-                        <div class="img">
-                            <a href="/qibla"><img src="/images/01.png" alt="Logo"></a>
-                        </div>
+               <p style="color:white;text-align: center">Сайтимиздаги маълумотлар барча инсонлар фойдаланиши учун тайёрланган. Асл нусхасини ўзгартирмаслик шарти билан рухсат олмасдан фойдаланиш мумкин.
+                   <!--www.ahlisunnat.com ® 2011---><?/*=date('Y')*/?></p>
+            </div>
+        </div>
+    </footer>
 
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4 widget footer-widget">
-                    <div class="suradua">
-                        <h4>Суралар ва дуолар</h4>
-                        <div class="img">
-                            <a href="/suradua"><img src="/images/02.png" alt="Logo"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-4 widget footer-widget">
-                    <div class="paygambar">
-                        <h4>М.Саид Арвос устоз ила</h4>
-                        <div class="img">
-                            <a href="/category/30"><img src="/images/03.png" alt="Logo"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <footer class="site-footer-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="copyrights-col-left col-md-6 col-sm-6">
-                    <p>&copy; 2014 NativeChurch. All Rights Reserved</p>
-                </div>
-                <div class="copyrights-col-right col-md-6 col-sm-6">
-                    <div class="social-icons"> <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook"></i></a> <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a> <a href="http://www.pinterest.com/" target="_blank"><i class="fa fa-pinterest"></i></a> <a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus"></i></a> <a href="http://www.pinterest.com/" target="_blank"><i class="fa fa-youtube"></i></a> <a href="#"><i class="fa fa-rss"></i></a> </div>
-                </div>
-            </div>
-        </div>
-    </footer>
     <!-- End Footer -->
-    <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a> </div>
+<!--    <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a> </div>-->
 <!-- SCRIPTS
       ================================================== -->
 
@@ -702,7 +675,7 @@ $this->beginPage()
                 document.getElementById("shom").innerHTML= mydata.praytimes.aqsham.replace("*", '');
                 document.getElementById("hufton").innerHTML= mydata.praytimes.quptan.replace("*", '');
 
-                document.getElementById("shahar").innerHTML= mydata.attributes.CityName+" <i class=' fa fa-search' id='search2'></i>";
+                document.getElementById("shahar").innerHTML= mydata.attributes.CityName+" <i class='fa fa-search'  id='search2' style='font-size:16px'></i>";
 
             }
         }

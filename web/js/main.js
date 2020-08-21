@@ -14,6 +14,11 @@ $(document).ready(function(){
         $('#shahar').addClass('none');
     });
 
+    $('#searchClose').on('click', function(){
+        $('#citySearch').addClass('none');
+        $('#shahar').removeClass('none');
+    });
+
 });
 
 window.addEventListener('keydown', checkKeyPress, false);

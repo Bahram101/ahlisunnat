@@ -14,7 +14,7 @@ use yii\helpers\Html;
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
-                            <h4 class="text-center" style="color:#142C4C;font-weight: bold">Мусхоф тартибида</h4>
+                            <h4 class="text-center" style="color:#142C4C;font-weight: bold">Мусҳаф тартибида</h4>
                             <table style="margin-right: 0 !important; display: block;">
                                 <tr>
                                     <td><h4 style="text-decoration: underline;color:#142C4C;">Сура номи</h4></td>

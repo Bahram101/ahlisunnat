@@ -6,23 +6,16 @@ use yii\web\JsExpression;
 
 ?>
 
-<!--<form action="/site/abc" role="form" class="notopmargin nobottommargin" style="padding-bottom: 10px;width:90%; margin:0 auto; margin-bottom: 10px;">
-    <div class="input-group divcenter">
-        <input type="text" class="form-control" placeholder="Шаҳар танланг" required="">
-        <div class="input-group-append">
-            <button class="btn btn-success" type="submit"><i class="icon-search"></i></button>
-        </div>
-    </div>
-</form>-->
 
 
 <form onsubmit="return false" style="display:inline-block;width:90%;">
-    <div class="col-11 col-lg-11 col-md-11 float-left">
+
+
+
+    <div class="col-11 col-lg-11 col-md-11 float-left" style="">
         <?
         $lang = Yii::$app->language;
-//        if($lang == 'uz'){
             $url = '/json/city';
-//        }
 
         echo Select2::widget( [
             'name' => 'city_id',
@@ -44,7 +37,7 @@ use yii\web\JsExpression;
         ])?>
 
     </div>
-    <div class="col-1 col-lg-1 col-md-1 float-left pb-1" style="padding-left: 0px;">
+    <div class="col-1 col-lg-1 col-md-1 float-left pb-1" style="padding-left: 0px;padding-top:5px;">
         <?= Html::input(
             'submit',null,'OK',
             [
@@ -55,6 +48,9 @@ use yii\web\JsExpression;
             ])
         ?>
     </div>
+    <span  id="searchClose" style="position: absolute; top: 7px;color:white;display: block;">
+        <i class="fa fa-times"> </i>
+    </span>
 </form>
 
 

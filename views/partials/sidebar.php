@@ -17,6 +17,36 @@ use app\widgets\Tags;?>
 
     <? echo HitArticles::widget()?>
 
+    <div class="widget sidebar-widget">
+        <div class="paygambar">
+            <div class="sidebar-widget-title">
+                <h3>М.Саид Арвос устоз ила</h3>
+            </div>
+            <div class="img">
+                <a href="/category/30"><img src="/images/03.png" alt="Logo"></a>
+            </div>
+        </div>
+    </div>
+    <div class="widget sidebar-widget">
+        <div class="suradua">
+            <div class="sidebar-widget-title">
+                <h3>Суралар ва дуолар</h3>
+            </div>
+            <div class="img">
+                <a href="/suradua"><img src="/images/02.png" alt="Logo"></a>
+            </div>
+        </div>
+    </div>
+    <div class="widget sidebar-widget">
+        <div class="caaba">
+            <div class="sidebar-widget-title">
+                <h3>Қибла истиқомати</h3>
+            </div>
+            <div class="img">
+                <a href="/qibla"><img src="/images/01.png" alt="Logo"></a>
+            </div>
+        </div>
+    </div>
 
     <div class="widget widget_links clearfix">
         <div class="sbody" align="center">
