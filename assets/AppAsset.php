@@ -21,7 +21,6 @@ class AppAsset extends AssetBundle
         "css/custom.css",
     ];
     public $js = [
-//            "js/jquery-2.0.0.min.js",
         "js/modernizr.js",
         "plugins/prettyphoto/js/prettyphoto.js",
         "js/helper-plugins.js",
@@ -32,7 +31,8 @@ class AppAsset extends AssetBundle
         "plugins/flexslider/js/jquery.flexslider.js",
         "plugins/countdown/js/jquery.countdown.min.js",
         'js/real-accessability.js?ver=1.0',
-        'js/main.js'
+        'js/main.js',
+        '/js/real-accessability.js?ver=1.0'
     ];
     public $depends = [
         'yii\web\YiiAsset',

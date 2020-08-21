@@ -13,22 +13,22 @@ use yii\widgets\LinkPager;
                 <div class="col-md-9 posts-archive" >
                     <div class="widget sidebar-widget search-form-widget hidden-lg hidden-md">
                         <div class="input-group input-group-lg">
-                            <input type="text" class="form-control" placeholder="Search Posts...">
+                            <input type="text" class="form-control" placeholder="Қидиринг...">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button"><i class="fa fa-search fa-lg"></i>
+                                <button class="btn btn-default" type="button"><i class="fa fa-search fa-lg" style="vertical-align: 0px;"></i>
                                 </button>
                             </span>
                         </div>
                     </div>
                     <span class="post-meta meta-data">
-                                        <span>
-                                            <a href="/">Бош саҳифа</a>
-                                        </span><span style="margin-right:10px">/</span>
+                        <span>
+                            <a href="/">Бош саҳифа</a>
+                        </span><span style="margin-right:10px">/</span>
 
-                                        <span>
-                                            <a href=""><?=$category['title']?></a>
-                                        </span>
-                                    </span>
+                        <span>
+                            <a href=""><?=$category['title']?></a>
+                        </span>
+                    </span>
                     <? if($subCat):?>
                         <? foreach($subCat as $item):?>
                             <h4 style="margin-bottom: 7px;"><i class="fa fa-list-alt" aria-hidden="true"></i><a href="/category/<?=$item['id']?>">
@@ -45,7 +45,8 @@ use yii\widgets\LinkPager;
                                     <h4><a href="/article/<?=Html::encode($article['id'])?>"><?= Html::encode($article['title'])?></a></h4>
                                     <span class="post-meta meta-data" style="background: none; border-bottom:none;padding:0">
 
-                                    <span><i class="fa fa-calendar"></i> <?= $article['created']?></span>
+<!--                                    <span><i class="fa fa-calendar"></i> --><?//= $article['created']?><!--</span>-->
+<!--                                        <span><i class="fa fa-eye"></i> --><?//= $article['hits'] ?><!--</span>-->
                                 </span>
                                     <p class="justify-content" style="text-align: justify"><?= $article['introtext']?></p>
 
@@ -53,6 +54,7 @@ use yii\widgets\LinkPager;
                                 </div>
                             </div>
                         </article>
+                        <hr>
                     <? endforeach?>
 
                     <?=

@@ -140,7 +140,7 @@ body .container{
     color: #007F7B;
 }
 
-@media(max-width: 400px){
+@media(max-width: 450px){
     .date1{
         display: none;
     }
@@ -148,7 +148,7 @@ body .container{
         display: block;
     }
 }
-@media(min-width: 401px){
+@media(min-width: 451px){
     .date1{
         display: block;
     }

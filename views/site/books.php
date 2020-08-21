@@ -7,7 +7,7 @@ use app\widgets\Subscribe;
 use app\widgets\Tags;
 use yii\helpers\Html;
 
-$this->title = 'About';
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="main">

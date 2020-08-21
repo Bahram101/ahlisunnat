@@ -19,6 +19,10 @@ $(document).ready(function(){
         $('#shahar').removeClass('none');
     });
 
+
+    $("#mundarija").on('click', function(){
+        console.log('clicked');
+    });
 });
 
 window.addEventListener('keydown', checkKeyPress, false);

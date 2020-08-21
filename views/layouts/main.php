@@ -27,6 +27,17 @@ $months = [
 ];
 
 $jsonN = json_decode($json,true);
+foreach($jsonN['praytimes'] as $item){
+    $items = explode(':', $item);
+
+    if(strlen($items[0]) == 1){
+        $items[0] = '0'.$items[0];
+    }
+
+}
+debug($jsonN);die;
+
+
 date_default_timezone_set('Asia/Almaty');
 //Islamic Date
 $date = strip_tags($jsonN['islamic_date']);
@@ -105,7 +116,7 @@ $this->beginPage()
     <link rel="stylesheet" id="real-accessability-css" href="/css/real-accessability.css?ver=1.0" type="text/css" media="all">
     <link rel="shortcut icon" href="/images/favicon.ico" />
     <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title>Ahlisunnat.uz | <?= Html::encode($this->title) ?></title>
 
     <?php $this->head() ?>
 </head>
@@ -120,7 +131,7 @@ $this->beginPage()
         <div class="notice-bar" style="background: #142C4C">
             <div class="container">
                 <div class="row" style="display: flex;align-items: center; flex-wrap:wrap; justify-content: space-around">
-                    <div class="col-md-12 hidden-lg hidden-md site-name">
+                    <div class="col-md-12 hidden-lg hidden-md site-name" style="width:75%;order: unset;">
                         <a href="/"><h3 style="color:white;text-transform: uppercase;font-family: Calibri;text-align: center;font-weight: bold">ahlisunnat</h3></a>
                     </div>
 
@@ -412,7 +423,7 @@ $this->beginPage()
             <div class="container">
 
                 <!-- <img src="/images/cloud.png">-->
-                <div class="row" style="height: 235px;">
+                <div class="row" style="    align-items: end;height: 235px;display: flex; justify-content: center;">
                     <div class="col-md-2 v-center plr-5" style="padding: 15px">
                         <img src="/images/1.png" class="img-fluid" style="animation: shake 9s;animation-iteration-count: infinite;">
                     </div>
@@ -448,7 +459,7 @@ $this->beginPage()
                     <ul class="sf-menu">
                         <li><a href="/" class="whiteFont">Бош саҳифа</a> </li>
                         <li><a href="/quran" class="whiteFont">Қуръони карим</a></li>
-                        <li class="megamenu mundarija"><a href="" class="whiteFont">Мундарижа</a>
+                        <li class="megamenu" id="mundarija"><a href="" class="whiteFont">Мундарижа</a>
                             <ul class="dropdown">
                                 <li>
                                     <div class="megamenu-container container">
@@ -560,8 +571,34 @@ $this->beginPage()
     <footer class="site-footer">
         <div class="container">
             <div class="row">
-               <p style="color:white;text-align: center">Сайтимиздаги маълумотлар барча инсонлар фойдаланиши учун тайёрланган. Асл нусхасини ўзгартирмаслик шарти билан рухсат олмасдан фойдаланиш мумкин.
-                   <!--www.ahlisunnat.com ® 2011---><?/*=date('Y')*/?></p>
+                <div class="col-md-9">
+                    <p style="color:white;text-align: center">Сайтимиздаги маълумотлар барча инсонлар фойдаланиши учун тайёрланган. Асл нусхасини ўзгартирмаслик шарти билан рухсат олмасдан фойдаланиш мумкин.
+                        <!--www.ahlisunnat.com ® 2011---><?/*=date('Y')*/?></p>
+                </div>
+                <div class="col-md-3">
+                    <div class="widget widget_links clearfix">
+
+                        <!-- HotLog -->
+                        <div class="text-center pt-4" style="margin-top:15px;">
+                            <span id="hotlog_counter"></span>
+                            <span id="hotlog_dyn"></span>
+                            <script type="text/javascript"> var hot_s = document.createElement('script');
+                                hot_s.type = 'text/javascript'; hot_s.async = true;
+                                hot_s.src = 'https://js.hotlog.ru/dcounter/2585088.js';
+                                hot_d = document.getElementById('hotlog_dyn');
+                                hot_d.appendChild(hot_s);
+                            </script>
+                            <noscript>
+                                <a href="https://click.hotlog.ru/?2585088" target="_blank">
+                                    <img src="https://hit5.hotlog.ru/cgi-bin/hotlog/count?s=2585088&im=307" border="0"
+                                         title="HotLog" alt="HotLog"></a>
+                            </noscript>
+                        </div>
+
+                        <!-- /HotLog -->
+                    </div>
+                </div>
+
             </div>
         </div>
     </footer>
@@ -571,8 +608,7 @@ $this->beginPage()
 <!-- SCRIPTS
       ================================================== -->
 
-<!--<script src="/js/jquery-2.0.0.min.js"></script>-->
-<script src="/js/jquery-3.5.1.min.js"></script>
+<script src="/js/jquery-2.0.0.min.js"></script>
 
 <script type='text/javascript' src='/js/real-accessability.js?ver=1.0'></script>
 

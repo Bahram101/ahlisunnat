@@ -23,14 +23,12 @@ use app\models\ContactForm;
 
 class SiteController extends Controller{
 
-    /*public function init(){
+    public function init(){
         parent::init();
         Yii::$app->assetManager->bundles = [
-            'yii\bootstrap\BootstrapPluginAsset' => false,
-            'yii\bootstrap\BootstrapAsset' => false,
             'yii\web\JqueryAsset' => false,
         ];
-    }*/
+    }
 
     public function behaviors(){
         return [
@@ -69,8 +67,10 @@ class SiteController extends Controller{
 
 
     public function actionIndex(){
+        Yii::$app->view->title = "Бош саҳифа";
         $articlesForMainPage = Article::articlesForMainPage();
         $latestArticles = Article::getLatestArticles(3);
+
 
         return $this->render('index', [
             'articles'=>$latestArticles['articles'],
@@ -97,7 +97,7 @@ class SiteController extends Controller{
 
     public function actionArticle($id){
         $article = Article::getArticle($id);
-
+        Yii::$app->view->title = $article['title'];
 
         return $this->render('article', compact('article'));
     }
@@ -105,6 +105,7 @@ class SiteController extends Controller{
 
     public function actionCategory($id){
         $category = Category::findOne($id);
+        Yii::$app->view->title = $category->title;
         $subCat = Category::find()->where(['parent_id'=>$category['id']])->asArray()->all();
         if(empty($category))
             throw new HttpException(404, 'Категория топилмади!');
@@ -120,6 +121,7 @@ class SiteController extends Controller{
 
 
     public function actionQuestion(){
+        Yii::$app->view->title = "Савол";
         $model = new Questions();
         if ($model->load(Yii::$app->request->post())) {
             $model->sendQuestion();
@@ -134,11 +136,13 @@ class SiteController extends Controller{
 
 
     public function actionSources(){
+        Yii::$app->view->title = "Манбалар";
         return $this->render('sources');
     }
 
 
     public function actionBooks(){
+        Yii::$app->view->title = "Юклаш";
         return $this->render('books');
     }
 

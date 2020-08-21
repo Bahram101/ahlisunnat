@@ -5,11 +5,13 @@ namespace app\controllers;
 
 
 use app\models\Quran;
+use Yii;
 use yii\web\Controller;
 
 class QuranController extends Controller{
 
     public function actionIndex(){
+        Yii::$app->view->title = 'Қуръони карим';
         $allSuraByMushaf = Quran::selectByMushaf();
         $allSuraByAlphabet = Quran::selectByAlphabet();
         ksort($allSuraByAlphabet);

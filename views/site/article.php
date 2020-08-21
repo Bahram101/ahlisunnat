@@ -40,7 +40,8 @@ use yii\helpers\Html;
                                 <span class="post-meta meta-data" style="background: none; border-bottom:none;padding:0">
                                     <span><i class="fa fa-archive"></i> <a
                                                 href="#"><?= $article['category']['title'] ?></a></span>
-                                    <span><i class="fa fa-calendar"></i> <?= $article['created'] ?></span>
+<!--                                    <span><i class="fa fa-calendar"></i> --><?//= $article['created'] ?><!--</span>-->
+                                    <span><i class="fa fa-eye"></i> <?= $article['hits'] ?></span>
                                 </span>
                                 <p class="justify-content" style="text-align: justify"><?= $article['fulltext'] ?></p>
 
