@@ -86,13 +86,19 @@ $config = [
                 'article/<id:\d+>' => 'site/article',
                 'category/<id:\d+>/page/<page:\d+>' => 'site/category',
                 'category/<id:\d+>' => 'site/category',
-//                'tag/<id:\d+>' => 'site/tag',
-//                'tag/<article:[a-z]+>' => 'tag/article',
-                'tag/article/<tag:[a-z]+>' => 'tag/article',
-                'sources' => 'site/sources',
+                'quran/<id:\d+>' => 'quran/view',
+                'download/<id:\d+>' => 'site/download',
+                'suradua' => 'suradua/index',
+                'suradua/<id:\d+>' => 'suradua/view',
+//                'tag/article/<tag:[a-z]+>' => 'tag/article',
+                /*'sources' => 'site/sources',
                 'questions' => 'site/question',
-                'books' => 'site/books',
-                'suradua/<id:\d+>' => 'suradua/view'
+                'bookss' => 'site/bookss',*/
+                '<action>'=>'site/<action>',
+                //  'tag/<id:\d+>' => 'site/tag',
+                //  'tag/<article:[a-z]+>' => 'tag/article',
+                //'quran' => 'quran/index',
+
             ],
         ],
 

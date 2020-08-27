@@ -23,7 +23,7 @@ use app\widgets\Tags;?>
                 <h3>М.Саид Арвос устоз ила</h3>
             </div>
             <div class="img">
-                <a href="/category/30"><img src="/images/03.png" alt="Logo"></a>
+                <a href="/category/30"><img src="/images/sarvarimiz.png" alt="Logo"></a>
             </div>
         </div>
     </div>
@@ -43,7 +43,7 @@ use app\widgets\Tags;?>
                 <h3>Қибла истиқомати</h3>
             </div>
             <div class="img">
-                <a href="/qibla"><img src="/images/01.png" alt="Logo"></a>
+                <a href="/qibla/"><img src="/images/01.png" alt="Logo"></a>
             </div>
         </div>
     </div>

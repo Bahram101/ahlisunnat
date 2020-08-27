@@ -27,15 +27,7 @@ $months = [
 ];
 
 $jsonN = json_decode($json,true);
-foreach($jsonN['praytimes'] as $item){
-    $items = explode(':', $item);
 
-    if(strlen($items[0]) == 1){
-        $items[0] = '0'.$items[0];
-    }
-
-}
-debug($jsonN);die;
 
 
 date_default_timezone_set('Asia/Almaty');
@@ -109,12 +101,11 @@ $this->beginPage()
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
-    <!-- Mobile Specific Metas
-      ================================================== -->
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="format-detection" content="telephone=no">
     <link rel="stylesheet" id="real-accessability-css" href="/css/real-accessability.css?ver=1.0" type="text/css" media="all">
-    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <link rel="shortcut icon" href="/images/icon.png" />
+    <link rel="stylesheet" href="/css/jquery.fancybox.min.css">
     <?php $this->registerCsrfMetaTags() ?>
     <title>Ahlisunnat.uz | <?= Html::encode($this->title) ?></title>
 
@@ -458,7 +449,7 @@ $this->beginPage()
                 <nav class="navigation"  >
                     <ul class="sf-menu">
                         <li><a href="/" class="whiteFont">Бош саҳифа</a> </li>
-                        <li><a href="/quran" class="whiteFont">Қуръони карим</a></li>
+                        <li><a href="/quran/" class="whiteFont">Қуръони карим</a></li>
                         <li class="megamenu" id="mundarija"><a href="" class="whiteFont">Мундарижа</a>
                             <ul class="dropdown">
                                 <li>
@@ -551,7 +542,7 @@ $this->beginPage()
                             </ul>
                         </li>
                         <li><a href="/sources" class="whiteFont">Манбалар</a></li>
-                        <li><a href="/questions" class="whiteFont">Боғланиш</a></li>
+                        <li><a href="/question" class="whiteFont">Боғланиш</a></li>
                         <li><a href="/books" class="whiteFont">Юклаш</a></li>
                     </ul>
                 </nav>
@@ -576,25 +567,22 @@ $this->beginPage()
                         <!--www.ahlisunnat.com ® 2011---><?/*=date('Y')*/?></p>
                 </div>
                 <div class="col-md-3">
-                    <div class="widget widget_links clearfix">
+                    <div class="widget widget_links clearfix" style="text-align: center;">
 
                         <!-- HotLog -->
-                        <div class="text-center pt-4" style="margin-top:15px;">
-                            <span id="hotlog_counter"></span>
-                            <span id="hotlog_dyn"></span>
-                            <script type="text/javascript"> var hot_s = document.createElement('script');
-                                hot_s.type = 'text/javascript'; hot_s.async = true;
-                                hot_s.src = 'https://js.hotlog.ru/dcounter/2585088.js';
-                                hot_d = document.getElementById('hotlog_dyn');
-                                hot_d.appendChild(hot_s);
-                            </script>
-                            <noscript>
-                                <a href="https://click.hotlog.ru/?2585088" target="_blank">
-                                    <img src="https://hit5.hotlog.ru/cgi-bin/hotlog/count?s=2585088&im=307" border="0"
-                                         title="HotLog" alt="HotLog"></a>
-                            </noscript>
-                        </div>
-
+                        <span id="hotlog_counter"></span>
+                        <span id="hotlog_dyn"></span>
+                        <script type="text/javascript"> var hot_s = document.createElement('script');
+                            hot_s.type = 'text/javascript'; hot_s.async = true;
+                            hot_s.src = 'https://js.hotlog.ru/dcounter/2590539.js';
+                            hot_d = document.getElementById('hotlog_dyn');
+                            hot_d.appendChild(hot_s);
+                        </script>
+                        <noscript>
+                            <a href="https://click.hotlog.ru/?2590539" target="_blank">
+                                <img src="https://hit5.hotlog.ru/cgi-bin/hotlog/count?s=2590539&im=307" border="0"
+                                     title="HotLog" alt="HotLog"></a>
+                        </noscript>
                         <!-- /HotLog -->
                     </div>
                 </div>
@@ -609,6 +597,7 @@ $this->beginPage()
       ================================================== -->
 
 <script src="/js/jquery-2.0.0.min.js"></script>
+<script src="/js/jquery.fancybox.min.js"></script>
 
 <script type='text/javascript' src='/js/real-accessability.js?ver=1.0'></script>
 

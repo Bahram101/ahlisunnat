@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Article;
 use app\models\ArticleTag;
+use app\models\Books;
 use app\models\Category;
 use app\models\Mailer;
 use app\models\Questions;
@@ -80,6 +81,28 @@ class SiteController extends Controller{
     }
 
 
+    public function actionDownload($id){
+        $book = (int)$id;
+        $storagePath = Yii::getAlias('@app/downloads');
+        $filename = $book.'.pdf';
+        $books_name = [
+            1 => 'Ҳазрати Муҳаммад (алайҳиссалом) ҳаёти',
+        ];
+        if(file_exists("$storagePath/$filename")){
+            $model = new Books();
+            $model->book_id = $book;
+            $model->name = $books_name[$book];
+            $model->created = date("Y-m-d");
+            $model->site = 2;
+            $model->insert();
+            return Yii::$app->response->sendFile("$storagePath/$filename", $books_name[$id].'.pdf');
+        }else{
+            throw new \yii\web\NotFoundHttpException('Такого файла не существует ');
+        }
+
+    }
+
+
     public function actionActivate($subscriberId, $subscriberToken){
         $subscriber = Subscribers::find()->where(['id'=>$subscriberId, 'token'=>$subscriberToken])->one();
         if(empty($subscriber)){
@@ -92,7 +115,6 @@ class SiteController extends Controller{
         }
         return $this->goHome();
     }
-
 
 
     public function actionArticle($id){
@@ -119,7 +141,6 @@ class SiteController extends Controller{
     }
 
 
-
     public function actionQuestion(){
         Yii::$app->view->title = "Савол";
         $model = new Questions();
@@ -134,7 +155,6 @@ class SiteController extends Controller{
     }
 
 
-
     public function actionSources(){
         Yii::$app->view->title = "Манбалар";
         return $this->render('sources');
@@ -145,8 +165,6 @@ class SiteController extends Controller{
         Yii::$app->view->title = "Юклаш";
         return $this->render('books');
     }
-
-
 
 
     public function actionLogin(){

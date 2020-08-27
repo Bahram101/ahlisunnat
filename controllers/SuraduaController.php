@@ -11,6 +11,8 @@ use yii\web\Controller;
 use app\models\Suradua;
 
 class SuraduaController extends Controller{
+
+
     public function actionIndex(){
         $suraDua = Suradua::find()->asArray()->all();
 

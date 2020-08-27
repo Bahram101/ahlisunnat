@@ -18,12 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <article class="post cause-item">
                         <div class="row">
                             <div class="col-md-4 col-sm-4">
-                                <a href="single-cause.html"> <img src="/images/paygambar.jpg" alt="" class="img-thumbnail"></a>
-                                <a href="#" class="btn btn-primary btn-block donate-paypal" data-toggle="modal"
-                                   data-target="#PaymentModal" style="font-size: 16px">Юклаш</a>
+                                <a href="/download/1"> <img src="/images/paygambar.jpg" alt="" class="img-thumbnail"></a>
+                                <a href="/download/1" class="btn btn-primary btn-block" style="font-size: 16px">Юклаш</a>
                             </div>
                             <div class="col-md-8 col-sm-8 ">
-                                <h3 style="font-size: 23px;"><a href="single-cause.html">Ҳазрати Муҳаммад (алайҳиссалом) ҳаёти</a></h3>
+                                <h3 style="font-size: 23px;"><a href="/download/1">Ҳазрати Муҳаммад (алайҳиссалом) ҳаёти</a></h3>
                                 <hr>
                                 <!--<div class="progress">
                                     <div class="progress-bar progress-bar-success" data-appear-progress-animation="80%"

@@ -21,4 +21,10 @@ class QuranController extends Controller{
         return $this->render('index', compact('allSuraByMushaf','allSuraByAlphabet'));
     }
 
+
+    public function actionView($id){
+        $currentSura = Quran::selectById($id);
+        return $this->render('view', compact('id', 'currentSura'));
+    }
+
 }
