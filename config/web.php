@@ -9,6 +9,7 @@ $config = [
     'name' => 'Аҳлисуннат',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log','queue'],
+//    'language' => 'uz-UZ',
     'language' => 'uz-UZ',
     'sourceLanguage' => 'uz',
     'aliases' => [
@@ -24,13 +25,6 @@ $config = [
         ],
     ],
     'components' => [
-        /*'queue' => [
-            'class' => \yii\queue\db\Queue::class,
-            'db' => 'db', // компонент подключения к БД
-            'tableName' => '{{%queue}}', // Имя таблицы
-            'channel' => 'default', // Queue channel key
-            'mutex' => \yii\mutex\MysqlMutex::class, // Mutex used to sync queries
-        ],*/
         'queue' => [
             'class' => \yii\queue\file\Queue::class,
             'as log' => \yii\queue\LogBehavior::class,

@@ -1,5 +1,7 @@
 <?php
 
+use app\modules\admin\models\Category;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -16,15 +18,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'introtext')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'fulltext')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'catalog_id')->textInput() ?>
+    <?= $form->field($model, 'keywords')->textInput(['rows' => 6]) ?>
 
-<!--    --><?//= $form->field($model, 'created')->textInput() ?>
-
-<!--    --><?//= $form->field($model, 'modified')->textInput() ?>
-
-<!--    --><?//= $form->field($model, 'hits')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'catalog_id')->dropDownList(
+            ArrayHelper::map(Category::find()->all(), 'id', 'title')
+    ) ?>
 
     <?= $form->field($model, 'on_main_page')->dropDownList(['1'=>'Да', '0'=>'Нет']) ?>
 

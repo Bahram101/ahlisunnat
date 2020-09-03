@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\jui\Autocomplete;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\ArticleSearch */
@@ -28,6 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
+            [
+                'attribute' => 'project_status',
+                'filter' => yii\jui\Autocomplete::widget([
+                    'model' => $filterModel,
+                    'attribute' => 'project_status',
+                    'clientOptions' => [
+                        'source' => ['USA', 'RUS'],
+                    ],
+                ]),
+                'value' => 'projectstatus.name'
+            ],
+
 //            'introtext:ntext',
 //            'text:ntext',
 //            'catalog_id',
@@ -37,11 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value'=> function($data){
                     return $data->category->title;
                 },
+                'filter' => Html::activeDropDownList($searchModel, 'catalog_id', \yii\helpers\ArrayHelper::map(\app\modules\admin\models\Category::find()->asArray()->all(), 'id', 'title'),['class'=>'form-control','prompt' => 'Select Category']),
             ],
             'created',
-            //'modified',
             'hits',
-            //'on_main_page',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

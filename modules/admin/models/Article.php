@@ -29,13 +29,14 @@ class Article extends \yii\db\ActiveRecord{
     public function getCategory(){
         return $this->hasOne(Category::class, ['id'=>'catalog_id']);
     }
+
     /**
      * {@inheritdoc}
      */
     public function rules(){
         return [
-            [['introtext', 'text', 'catalog_id'], 'required'],
-            [['introtext', 'text'], 'string'],
+            [['introtext', 'fulltext', 'catalog_id'], 'required'],
+            [['introtext', 'fulltext','keywords'], 'string'],
             [['catalog_id', 'hits', 'on_main_page'], 'integer'],
             [['created', 'modified'], 'safe'],
             [['title'], 'string', 'max' => 255],
@@ -51,7 +52,8 @@ class Article extends \yii\db\ActiveRecord{
             'id' => 'ID',
             'title' => 'Название',
             'introtext' => 'Описание',
-            'text' => 'Текст',
+            'fulltext' => 'Текст',
+            'keywords' => 'Ключевые слова',
             'catalog_id' => 'Категория',
             'created' => 'Дата',
             'modified' => 'Modified',
@@ -60,6 +62,10 @@ class Article extends \yii\db\ActiveRecord{
         ];
     }
 
+    public static function getArticleTitle($text){
+        $article = self::find()->andFilterWhere(['like', 'title', $text])->all();
+
+    }
 
 
 }

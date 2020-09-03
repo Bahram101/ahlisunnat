@@ -18,8 +18,8 @@ class Article extends \yii\db\ActiveRecord{
 
     public function rules(){
         return [
-            [['introtext', 'text', 'catalog_id'], 'required'],
-            [['introtext', 'text'], 'string'],
+            [['introtext', 'fulltext', 'catalog_id'], 'required'],
+            [['introtext', 'fulltext'], 'string'],
             [['catalog_id', 'hits', 'on_main_page'], 'integer'],
             [['created', 'modified'], 'safe'],
             [['title'], 'string', 'max' => 255],
@@ -32,7 +32,7 @@ class Article extends \yii\db\ActiveRecord{
             'id' => 'ID',
             'title' => 'Title',
             'introtext' => 'Introtext',
-            'text' => 'Text',
+            'fulltext' => 'Text',
             'catalog_id' => 'Catalog ID',
             'created' => 'Created',
             'modified' => 'Modified',
@@ -100,6 +100,11 @@ class Article extends \yii\db\ActiveRecord{
     public function getTags(){
         return $this->hasMany(Tag::class, ['id'=>'tag_id'])
             ->viaTable('article_tag', ['article_id' => 'id']);
+    }
+
+    public function viewedCounter(){
+        $this->hits += 1;
+        return $this->save();
     }
 
 }

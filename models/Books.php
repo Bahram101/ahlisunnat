@@ -29,8 +29,8 @@ class Books extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['book_id', 'name', 'created', 'site'], 'required'],
-            [['book_id', 'site'], 'integer'],
+            [['book_id', 'name', 'created'], 'required'],
+            [['book_id'], 'integer'],
             [['name'], 'string'],
             [['created'], 'safe'],
         ];

@@ -18,7 +18,7 @@ class ArticleSearch extends Article
     {
         return [
             [['id', 'catalog_id', 'hits', 'on_main_page'], 'integer'],
-            [['title', 'introtext', 'text', 'created', 'modified'], 'safe'],
+            [['title', 'introtext', 'fulltext', 'created', 'modified'], 'safe'],
         ];
     }
 
@@ -31,18 +31,9 @@ class ArticleSearch extends Article
         return Model::scenarios();
     }
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
-    public function search($params)
-    {
-        $query = Article::find()->with('category');
 
-        // add conditions that should always apply here
+    public function search($params){
+        $query = Article::find()->with('category')->orderBy(['id' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

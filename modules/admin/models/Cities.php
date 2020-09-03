@@ -22,21 +22,14 @@ use Yii;
  * @property string|null $state_uz
  * @property string $timezone
  */
-class Cities extends \yii\db\ActiveRecord
-{
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
+class Cities extends \yii\db\ActiveRecord{
+
+    public static function tableName(){
         return 'cities';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
+
+    public function rules(){
         return [
             [['country_id', 'name_en', 'name_tr', 'state_en', 'state_tr', 'timezone'], 'required'],
             [['country_id', 'ready'], 'integer'],

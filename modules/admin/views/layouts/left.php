@@ -34,7 +34,8 @@
                     ['label' => 'Статьи', 'icon' => 'file-code-o', 'url' => ['article/index']],
                     ['label' => 'Категории', 'icon' => 'dashboard', 'url' => ['category/index']],
                     ['label' => 'Вопросы', 'icon' => 'dashboard', 'url' => ['questions/index']],
-//                    ['label' => 'Подписчики', 'icon' => 'dashboard', 'url' => ['subscribers/index']],
+                    ['label' => 'Книги', 'icon' => 'dashboard', 'url' => ['books/index']],
+                    ['label' => 'Просмотры', 'icon' => 'dashboard', 'url' => ['counter/index']],
 //                    ['label' => 'Теги', 'icon' => 'dashboard', 'url' => ['tag/index']],
 //                    [
 //                        'label' => 'Рассылки',

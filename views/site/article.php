@@ -41,19 +41,19 @@ use yii\helpers\Html;
                                     <span><i class="fa fa-archive"></i> <a
                                                 href="#"><?= $article['category']['title'] ?></a></span>
 <!--                                    <span><i class="fa fa-calendar"></i> --><?//= $article['created'] ?><!--</span>-->
-                                    <span><i class="fa fa-eye"></i> <?= $article['hits'] ?></span>
+                                    <span><i class="fa fa-eye"></i> <?= $article->hits ?></span>
                                 </span>
                                 <p class="justify-content" style="text-align: justify"><?= $article['fulltext'] ?></p>
 
-                                <div class="widget sidebar-widget tags" style="margin-bottom:0">
+                                <!--<div class="widget sidebar-widget tags" style="margin-bottom:0">
                                     <div class="tag-cloud">
-                                        <? if($article['tags']):?>
-                                        <?foreach($article['tags'] as $tag):?>
-                                            <a href="/tag/article?tag=<?=$tag['title']?>"><?=$tag['title']?></a>
-                                        <? endforeach;?>
-                                        <? endif;?>
+                                        <?/* if($article['tags']):*/?>
+                                        <?/*foreach($article['tags'] as $tag):*/?>
+                                            <a href="/tag/article?tag=<?/*=$tag['title']*/?>"><?/*=$tag['title']*/?></a>
+                                        <?/* endforeach;*/?>
+                                        <?/* endif;*/?>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </article>

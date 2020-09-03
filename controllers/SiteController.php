@@ -11,6 +11,7 @@ use app\models\Questions;
 use app\models\Quran;
 use app\models\Subscribers;
 use app\models\Tag;
+use app\modules\admin\models\Counter;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -93,11 +94,10 @@ class SiteController extends Controller{
             $model->book_id = $book;
             $model->name = $books_name[$book];
             $model->created = date("Y-m-d");
-            $model->site = 2;
             $model->insert();
             return Yii::$app->response->sendFile("$storagePath/$filename", $books_name[$id].'.pdf');
         }else{
-            throw new \yii\web\NotFoundHttpException('Такого файла не существует ');
+            throw new NotFoundHttpException('Такого файла не существует ');
         }
 
     }
@@ -118,8 +118,10 @@ class SiteController extends Controller{
 
 
     public function actionArticle($id){
-        $article = Article::getArticle($id);
-        Yii::$app->view->title = $article['title'];
+        $article = Article::find()->with('category')->where(['id'=>$id])->one();
+        $article->viewedCounter();
+        Yii::$app->view->title = $article->title;
+        Counter::addHit($id);
 
         return $this->render('article', compact('article'));
     }
@@ -147,7 +149,7 @@ class SiteController extends Controller{
         if ($model->load(Yii::$app->request->post())) {
             $model->sendQuestion();
             Yii::$app->session->setFlash('success', 'Саволингиз муваффақиятли юборилди!');
-            return $this->redirect(['/questions']);
+            return $this->redirect(['/question']);
         }
         return $this->render('questions', [
             'model' => $model,
