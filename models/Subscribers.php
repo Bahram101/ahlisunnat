@@ -52,15 +52,15 @@ class Subscribers extends \yii\db\ActiveRecord{
     }
 
     public function addSubscriber(){
-        if($this->validate()){
+//        if($this->validate()){
             $this->setAttribute('email', $this->email);
             $this->setAttribute('token', Yii::$app->security->generateRandomString(15));
             $this->setAttribute('created_at', date('Y-m-d H:i:s'));
             $this->setAttribute('updated_at', date('Y-m-d H:i:s'));
             $this->save();
             return true;
-        }
-        return false;
+//        }
+//        return false;
     }
 
     public static function getSubscribers(){

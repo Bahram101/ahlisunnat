@@ -6,13 +6,8 @@ use yii\web\JsExpression;
 
 ?>
 
-
-
 <form onsubmit="return false" style="display:inline-block;width:90%;">
-
-
-
-    <div class="col-11 col-lg-11 col-md-11 float-left" style="">
+    <div class="col-11 col-lg-11 col-md-11 float-left">
         <?
         $lang = Yii::$app->language;
             $url = '/json/city';

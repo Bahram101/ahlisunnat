@@ -19,8 +19,9 @@ use yii\helpers\Html;
                                     <span>
                                         <a href="#">Главная </a>
                                     </span>
+                                     <span> / </span>
                                     <span>
-                                        <a href="">asdf</a>
+                                        <a href=""><?= $suraDua[0]['title']?></a>
                                     </span>
                                 </span>
                                 <div class="entry-title text-center" >

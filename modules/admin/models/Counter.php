@@ -47,6 +47,7 @@ class Counter extends \yii\db\ActiveRecord{
             ->where(['article_id'=>$id])
             ->andWhere(['created' => date('Yn')])
             ->one();
+//        debug($counter);die;
         if($counter){
             $counter->hit += 1;
             $counter->save();
@@ -57,6 +58,11 @@ class Counter extends \yii\db\ActiveRecord{
             $model->created = date('Yn');
             $model->save();
         }
+    }
+
+    public static function getHit($id){
+        $query = "SELECT SUM(hit) FROM `counter` WHERE `article_id` = $id";
+        return Counter::findBySql($query)->asArray()->all();
     }
 
 
@@ -80,31 +86,16 @@ class Counter extends \yii\db\ActiveRecord{
         }
     }
 
-    public static function getArticleTitle($id){
-        echo $id;
-    }
 
-    /*public static function Dates(){
-        $months = self::Monthes();
-        $i = 1;
-        $date = [];
-        while ($i <= 12) {
-            $date[$i]['name'] = date('Y').' / '.$months[$i];
-            $date[$i]['id'] = date('Y').$i;
-            $i++;
+    /*public static function getHit($id){
+        $datas = Counter::find()->where(['article_id'=>$id])->asArray()->all();
+
+        $totalViews = 0;
+        foreach($datas as $data){
+            $totalViews += $data['hit'];
         }
-        //return $date;
-       return ArrayHelper::map($date,'id','name');
+        return $totalViews;
     }*/
 
-    /* public function getParent(){
-       return $this->hasOne(Article::class, ['id' => 'article_id']);
-   }
 
-
-   public function getParentName(){
-       $parent = $this->parent;
-
-       return $parent ? $parent->title : '';
-   }*/
 }

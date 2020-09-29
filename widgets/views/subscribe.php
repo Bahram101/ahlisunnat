@@ -12,7 +12,10 @@
         </div>
     <? endif; ?>
 
-    <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+    <?php $form = ActiveForm::begin([
+            'id' => 'contact-form',
+//            'action' => ['/subscribe'],
+    ]); ?>
 
     <?= $form->field($subscriber, 'email')->textInput(['class' => 'form-control', 'placeholder' => 'Email...'])->label(false) ?>
 

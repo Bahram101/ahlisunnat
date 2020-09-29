@@ -107,6 +107,7 @@ img {
 }
 img, object, embed, audio, video {
     max-width: 100%;
+    width: 100%;
 }
 img {
     height: auto;

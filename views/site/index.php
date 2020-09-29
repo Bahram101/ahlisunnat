@@ -8,6 +8,8 @@ use yii\helpers\Html;
 use yii\widgets\LinkPager;
 
 ?>
+
+
 <div class="main" role="main">
     <div id="content" class="content full">
         <div class="container">
@@ -34,7 +36,7 @@ use yii\widgets\LinkPager;
                                         <span class="post-meta meta-data">
                                         <span><i class="fa fa-archive"></i> <a href="/category/<?=$article['category']['id']?>"><?= $article['category']['title'] ?></a></span>
 <!--                                        <span><i class="fa fa-calendar"></i> --><?//= $article['created'] ?><!--</span>-->
-                                        <span><i class="fa fa-eye"></i> <?= $article['hits'] ?></span>
+                                        <span><i class="fa fa-eye"></i> <?= $article['views'] ?></span>
                                     </span>
                                         <p class="justify-content"
                                            style="text-align: justify"><?= $article['introtext'] ?></p>
@@ -55,7 +57,7 @@ use yii\widgets\LinkPager;
                                     <span class="post-meta meta-data">
                                         <span><i class="fa fa-archive"></i> <a href="/category/<?=$article['category']['id']?>"><?= $article['category']['title'] ?></a></span>
 <!--                                        <span><i class="fa fa-calendar"></i> --><?//= $article['created'] ?><!--</span>-->
-                                        <span><i class="fa fa-eye"></i> <?= $article['hits'] ?></span>
+                                        <span><i class="fa fa-eye"></i> <?= $article['views'] ?></span>
                                     </span>
                                     <p class="justify-content"
                                        style="text-align: justify"><?= $article['introtext'] ?></p>

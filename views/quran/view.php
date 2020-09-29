@@ -16,12 +16,12 @@ use yii\helpers\Html;
                         <div class="row">
 
                             <div class="col-md-12 col-sm-12">
-                                 <span class="post-meta meta-data">
+                                <span class="post-meta meta-data">
                                     <span>
                                         <a href="/">Главная / </a>
                                     </span>
                                     <span>
-                                        <a href="/quran/">Қурони Карим / </a>
+                                        <a href="/quran/">Қуръони Карим / </a>
                                     </span>
                                      <span>
                                         <a href=""><?
@@ -34,11 +34,11 @@ use yii\helpers\Html;
                                 <div class="entry-title text-center" >
                                     <h2><a  style="text-transform: none"><?= $suraDua[0]['title']?></a></h2>
                                 </div>
-
                                 <br>
 
-                                <a class="sura">
-                                    <audio controls style="width:100%" class="mb-3">
+
+                                <a class="sura" id="sura">
+                                    <audio controls style="width:100%" id="audio" controlslist="nodownload" class="mb-3">
                                         <source src="/images/quran/audio/<?
                                         if(strlen($id) == 1){
                                             echo "00".$id;
@@ -47,23 +47,24 @@ use yii\helpers\Html;
                                         }else{
                                             echo $id;
                                         }
-                                        ?>.mp3" type="audio/mpeg">
+                                        ?>.mp3" id="quran-audio" type="audio/mpeg">
                                     </audio>
+                                    <a href="/quran/download/<?= $id?>" id="sura-download"><button class="btn btn-primary pull-right"><i class="fa fa-cloud-download"></i></button></a>
                                     <br>
 
-                                    <div class="col-lg-12" style="margin-top:10px;display: flex;justify-content: space-around;">
+                                    <div class="col-lg-12" style="margin-top:10px;display: flex;justify-content: space-between;">
                                         <? if($id > 1):?>
-                                            <a href="/quran/<?= $id-1?>" class="btn btn-outline-secondary float-left">&larr; Олдинги бет</a>
+                                            <a href="/quran/<?= $id-1?>" class="btn btn-outline-secondary float-left" data-id="<?=$id-1?>" id="previous-page">&larr; Олдинги бет</a>
                                         <? endif;?>
 
                                         <? if($id < 604):?>
-                                            <a href="/quran/<?= $id+1?>" class="btn btn-outline-dark float-right">Келаси бет &rarr;</a>
+                                            <a href="/quran/<?= $id+1?>" class="btn btn-outline-dark float-right" data-id="<?=$id+1?>" id="next-page">Келаси бет &rarr;</a>
                                         <? endif;?>
                                     </div>
                                     <br>
-                                    <br>
 
-                                    <a data-fancybox="gallery" href="/images/quran/img/<?
+
+                                    <a data-fancybox="gallery" id="fancy" href="/images/quran/img/<?
                                     if(strlen($id) == 1){
                                         echo "00".$id;
                                     }elseif(strlen($id) == 2){
@@ -71,26 +72,30 @@ use yii\helpers\Html;
                                     }else{
                                         echo $id;
                                     }
-                                    ?>.jpg"><img src="/images/quran/img/<?
-                                    if(strlen($id) == 1){
-                                        echo "00".$id;
-                                    }elseif(strlen($id) == 2){
-                                        echo "0".$id;
-                                    }else{
-                                        echo $id;
-                                    }
-                                    ?>.jpg" alt="<?= $id."jpg"?>" width="80%" style="display: flex;margin:0 auto;" ></a>
+                                    ?>.jpg">
+                                        <img src="/images/quran/img/<?
+                                        if(strlen($id) == 1){
+                                            echo "00".$id;
+                                        }elseif(strlen($id) == 2){
+                                            echo "0".$id;
+                                        }else{
+                                            echo $id;
+                                        }
+                                        ?>.jpg" data-id="<?=$id?>" id="quran-image" width="80%" style="display: flex;margin:0 auto;" >
+                                    </a>
 
                             </div>
-                            <div class="col-lg-12" style="margin-top:10px;display: flex;justify-content: space-around;">
-                                <? if($id > 1):?>
-                                    <a href="/quran/<?= $id-1?>" class="btn btn-outline-secondary float-left">&larr; Олдинги бет</a>
-                                <? endif;?>
+                            <!--<div class="col-lg-12" style="margin-top:10px;display: flex;justify-content: space-around;">
+                                <div class="col-lg-12" style="margin-top:10px;display: flex;justify-content: space-between;">
+                                    <?/* if($id > 1):*/?>
+                                        <a href="/quran/<?/*= $id-1*/?>" class="btn btn-outline-secondary float-left" data-id="<?/*=$id-1*/?>" id="previous-page">&larr; Олдинги бет</a>
+                                    <?/* endif;*/?>
 
-                                <? if($id < 604):?>
-                                    <a href="/quran/<?= $id+1?>" class="btn btn-outline-dark float-right">Келаси бет &rarr;</a>
-                                <? endif;?>
-                            </div>
+                                    <?/* if($id < 604):*/?>
+                                        <a href="/quran/<?/*= $id+1*/?>" class="btn btn-outline-dark float-right" data-id="<?/*=$id+1*/?>" id="next-page">Келаси бет &rarr;</a>
+                                    <?/* endif;*/?>
+                                </div>
+                            </div>-->
                         </div>
                     </article>
                 </div>

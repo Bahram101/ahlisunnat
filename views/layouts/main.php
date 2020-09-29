@@ -549,11 +549,14 @@ $this->beginPage()
             </div>
         </div>
 
+
         <!--</div>-->
     </div>
     <!-- End Hero Slider -->
-    <?//= Alert::widget() ?>
+
     <!-- Start Content -->
+
+
     <?=$content;?>
     <!-- Start Featured Gallery -->
 
@@ -692,7 +695,6 @@ $this->beginPage()
                 // var newstr = str.replace("*", '');
                 document.cookie = "city_id="+mydata.attributes.ID;
 
-
                 document.getElementById("imsok").innerHTML= mydata.praytimes.imsak.replace("*", '');
                 document.getElementById("kuesh").innerHTML= mydata.praytimes.kun.replace("*", '');
                 document.getElementById("peshin").innerHTML= mydata.praytimes.besin.replace("*", '');
@@ -701,10 +703,8 @@ $this->beginPage()
                 document.getElementById("hufton").innerHTML= mydata.praytimes.quptan.replace("*", '');
 
                 document.getElementById("shahar").innerHTML= mydata.attributes.CityName+" <i class='fa fa-search'  id='search2' style='font-size:16px'></i>";
-
             }
         }
-
     }
     $(document).ready(function(){
         $("#menu").on("click","a", function (event) {
@@ -728,7 +728,6 @@ $this->beginPage()
             return false;
         });
     });
-
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     });

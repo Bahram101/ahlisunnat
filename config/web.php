@@ -56,7 +56,7 @@ $config = [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.mail.ru',
                 'username' => 'bahram101@mail.ru',
-                'password' => 'gnusmasgnusmas2',
+                'password' => 'gnusmasgnus',
                 'port' => '587', //if ssl -> 465
                 'encryption' => 'tls', //if -> ssl
             ],
@@ -81,18 +81,11 @@ $config = [
                 'category/<id:\d+>/page/<page:\d+>' => 'site/category',
                 'category/<id:\d+>' => 'site/category',
                 'quran/<id:\d+>' => 'quran/view',
+                'quran/download/<id:\d+>' => 'quran/download',
                 'download/<id:\d+>' => 'site/download',
                 'suradua' => 'suradua/index',
                 'suradua/<id:\d+>' => 'suradua/view',
-//                'tag/article/<tag:[a-z]+>' => 'tag/article',
-                /*'sources' => 'site/sources',
-                'questions' => 'site/question',
-                'bookss' => 'site/bookss',*/
                 '<action>'=>'site/<action>',
-                //  'tag/<id:\d+>' => 'site/tag',
-                //  'tag/<article:[a-z]+>' => 'tag/article',
-                //'quran' => 'quran/index',
-
             ],
         ],
 

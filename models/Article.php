@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use app\modules\admin\models\Counter;
 use Yii;
 use yii\data\Pagination;
 
@@ -13,6 +14,10 @@ class Article extends \yii\db\ActiveRecord{
 
     public function getCategory(){
         return $this->hasOne(Category::class, ['id' => 'catalog_id']);
+    }
+
+    public function getCounter(){
+        return $this->hasMany(Counter::class, ['article_id'=>'id']);
     }
 
 
@@ -42,8 +47,15 @@ class Article extends \yii\db\ActiveRecord{
     }
 
     public static function articlesForMainPage($limit = 3){
-        return Article::find()->where(['on_main_page'=>1])->with('category')->orderBy('modified desc')->limit($limit)->asArray()->all();
+        return Article::find()
+            ->where(['on_main_page'=>1])
+            ->with('category')
+            ->orderBy('modified desc')
+            ->limit($limit)
+            ->asArray()
+            ->all();
     }
+
 
 
     public static function getLatestArticles($pageSize = 5){
@@ -54,7 +66,12 @@ class Article extends \yii\db\ActiveRecord{
             'forcePageParam' => false,
             'pageSizeParam' => false
         ]);
-        $articles = $query->offset($pages->offset)->limit($pages->limit)->orderBy(['id' => SORT_DESC])->asArray()->with('category')->all();
+        $articles = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->orderBy(['id' => SORT_DESC])
+            ->asArray()
+            ->with('category')
+            ->all();
         $datas = ['pages' => $pages, 'articles'=>$articles];
 
         return  $datas;

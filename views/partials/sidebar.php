@@ -17,6 +17,8 @@ use app\widgets\Tags;?>
 
     <? echo HitArticles::widget()?>
 
+    <? echo Subscribe::widget()?>
+
     <div class="widget sidebar-widget">
         <div class="paygambar">
             <div class="sidebar-widget-title">

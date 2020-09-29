@@ -279,6 +279,7 @@ body .container{
     .site-books article .col-md-8{
         padding-left: 0;
     }
+
 }
 
 @media(max-width:767px){
@@ -287,6 +288,9 @@ body .container{
     }
     .site-footer{
         margin-top: 15px;
+    }
+    .suraDown{
+        display: block;
     }
 }
 

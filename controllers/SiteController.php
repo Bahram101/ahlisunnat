@@ -32,6 +32,7 @@ class SiteController extends Controller{
         ];
     }
 
+
     public function behaviors(){
         return [
             'access' => [
@@ -71,7 +72,16 @@ class SiteController extends Controller{
     public function actionIndex(){
         Yii::$app->view->title = "Бош саҳифа";
         $articlesForMainPage = Article::articlesForMainPage();
+        foreach($articlesForMainPage as $key => $val){
+            $views = Counter::getHit($val['id']);
+            $articlesForMainPage[$key]['views'] += $views[0]['SUM(hit)'];
+        }
+
         $latestArticles = Article::getLatestArticles(3);
+        foreach($latestArticles['articles'] as $key => $val){
+            $views = Counter::getHit($val['id']);
+            $latestArticles['articles'][$key]['views'] += $views[0]['SUM(hit)'];
+        }
 
 
         return $this->render('index', [
@@ -82,9 +92,20 @@ class SiteController extends Controller{
     }
 
 
+    public function actionArticle($id){
+        $article = Article::find()->with('category')->where(['id'=>$id])->asArray()->one();
+        Yii::$app->view->title = $article->title;
+        Counter::addHit($id);
+        $hits = Counter::getHit($id);
+        $article['hits'] = $hits[0]['SUM(hit)'];
+        return $this->render('article', compact('article'));
+    }
+
+
     public function actionDownload($id){
         $book = (int)$id;
         $storagePath = Yii::getAlias('@app/downloads');
+        echo $storagePath;die;
         $filename = $book.'.pdf';
         $books_name = [
             1 => 'Ҳазрати Муҳаммад (алайҳиссалом) ҳаёти',
@@ -113,17 +134,13 @@ class SiteController extends Controller{
             $subscriber->activate();
             Yii::$app->session->setFlash('success', 'Электрон манзилингиз муваффақиятли тасдиқланди!');
         }
-        return $this->goHome();
+//        return $this->goHome();
+        return $this->redirect(['/subscribe']);
     }
 
+    public function actionSubscribe(){
 
-    public function actionArticle($id){
-        $article = Article::find()->with('category')->where(['id'=>$id])->one();
-        $article->viewedCounter();
-        Yii::$app->view->title = $article->title;
-        Counter::addHit($id);
-
-        return $this->render('article', compact('article'));
+        return $this->render('subscribe');
     }
 
 
